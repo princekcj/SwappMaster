@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="Logincontainer">
+    <iv class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="resetHeader mb-4">Forgot Password?</legend>
+                    <br>
+                <label class="resetdetails">No worries. We will send you reset instructions</label>
+                    <div id="leftcent">
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                </div>
+            </fieldset>
+        <div class="form-group">
+                {{ form.submit(class="signinbutton") }}
+            </div>
+        </form>
+           <div class="pt-3">
+
+        <small class="text-muted">
+            <img src="{{ url_for('static', filename='Vector.png') }}"  width="12.67" height="12.67"><a class="ml-2" href="{{ url_for('register') }}">Back To Login</a>
+        </small>
+    </div>
+    </div>
+    </div>
+
+</div>
+{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% if title %}
+        <title>Swapp - {{title}}</title>
+    {% else %}
+        <title>Swapp</title>
+    {% endif %}
+</head>
+<body>
+
+</body>
+</html>

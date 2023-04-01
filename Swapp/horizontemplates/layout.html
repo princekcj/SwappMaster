@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    {% if title %}
+        <title>Swapp - {{ title }}</title>
+    {% else %}
+        <title>Swapp</title>
+    {% endif %}
+</head>
+<body style="background-color:#F3FBFF"">
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navtitle" href="/">Swapp</a>
+        <h1 id="v32" class="v32:740">Welcome Back</h1>
+            <br/>
+        <a id="ms" >Check out the latest updates</a>
+            	<div class="create">
+		<div id="createbox" onclick="openForm2()">
+			<img src="{{ url_for('static', filename='plus.png') }}"  width="25" height="25">&nbsp;<a style="font-weight: 600;color:white;font-size: 14px;" >Create New Request </a>
+		</div>
+                </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main"  style="width:100%;background-color:#F3FBFF">
+<div class="popup2box" id="popuponumbertwo">
+    <button class="close-button" onclick="closeForm2()">X</button>
+<h1 id="popbox2h" style="margin-left:10%;">Creating a new request</h1>
+    <h2 id="popbox2h2"  style="margin-left:15%;">Create a brand new exchange request</h2>
+    <form id="createform">
+        <div style="height: 65px;width: 99%;top:24%;left: 0.1%;border-radius: 5px;position:absolute;background: #F3FBFF;border-radius: 5px;"></div>
+    <label style="position:absolute;top:23%;left:19%;">You send:</label>
+    <input  name="amount" onchange="crchangerate()" placeholder="Amount" type="text" id="crbox"><img style="margin-top:86px;margin-left:180px;" src="{{ url_for('static', filename='arrowside.png') }}"  width="20" height="20">
+        <div id="requestcrup">
+        <select onchange="rate()" name="currencycreate1" id="currenci">
+                        <optgroup >
+    <option value="USD">USD</option>
+    <option value="GHS">GHS</option>
+    <option value="GBP">GBP</option>
+                        </optgroup>
+  </select>
+    </div>
+        <br>
+        <h2 class="crsr">System Rate</h2> <div name="sr2boxid" id="sr2boxid" class="sr2box">1.00</div>
+                <div style="height: 56px;width: 99%;top:61%;left: 0.1%;border-radius: 5px;position:absolute;background: #F6F6F6;border-radius: 5px;"></div>
+    <label style="position:absolute;top:59%;left:19%;">You receive:</label>
+    <div id="cr2bx" class="create2box">0.00</div><img style="margin-top:86px;display:inline;margin-left:180px;" src="{{ url_for('static', filename='arrowside.png') }}"  width="20" height="20">
+    <div class="repreq">
+        <select onchange="rate()" name="currencycreate2" id="currenci">
+                        <optgroup >
+    <option value="USD" >USD</option>
+    <option value="GHS" >GHS</option>
+    <option value="GBP">GBP</option>
+                        </optgroup>
+  </select>
+    </div>
+        <input style="left:62.5px;" id="acceptrequest" type="submit" value="Create Request">
+    </form>
+</div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          {% block content %}{% endblock %}
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/1cd3bab355.js" crossorigin="anonymous"></script>
+     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    ////////////////
+        function openForm2() {
+    var baseCurInput = document.getElementsByName("currencycreate1")[0]
+  base = baseCurInput.value
+
+    var CurInput = document.getElementsByName("currencycreate2")[0]
+  nonbase = CurInput.value
+
+  if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoGHS }}
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }
+
+
+  document.getElementById("popuponumbertwo").style.display = "flex";
+}
+function closeForm2() {
+  document.getElementById("popuponumbertwo").style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  let modal = document.getElementById('userid');
+  if (event.target == modal) {
+    closeForm2();
+  }
+}
+///////////
+function rate2(){
+   var baseCurInput = document.getElementById("requestg")
+         console.log(baseCurInput)
+  base = baseCurInput.innerHTML
+  console.log(base)
+
+    var CurInput = document.getElementsByName("currencycreate")[0]
+  nonbase = CurInput.innerHTML
+
+  if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGHS }}
+  document.querySelector("a#rateref").innerHTML ={{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("srbox").innerHTML = {{ GHStoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GHStoUSD }}
+  document.querySelector("a#rateref").innerHTML ={{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("srbox").innerHTML = {{ GBPtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoGHS }}
+   document.querySelector("a#rateref").innerHTML ={{ GHStoUSD }}
+
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ GHStoGBP }}
+  document.getElementById("rateref").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGBP }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = {{ GBPtoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  }
+}
+
+function rate(){
+var baseCurInput = document.getElementsByName("currencycreate1")[0]
+  base = baseCurInput.value
+
+    var CurInput = document.getElementsByName("currencycreate2")[0]
+  nonbase = CurInput.value
+
+if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoGHS }}
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }
+}
+///////////
+
+
+document.getElementById("createform").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+   json = { "sr2boxid" :document.getElementById("sr2boxid").innerHTML,
+                "currencycreate2" : document.getElementsByName("currencycreate2")[0].value,
+           "currencycreate1" : document.getElementsByName("currencycreate1")[0].value,
+           "amount" : document.getElementById("cr2bx").innerHTML
+
+   }
+   console.log(json)
+  var formData = new FormData(this);
+   console.log(formData)
+  fetch("{{ url_for('create_request') }}", {
+    method: "POST",
+    body: JSON.stringify(json),
+    headers: {     "Content-Type": "application/json"   }
+  })
+  .then(response => response.json())
+  .then(data => {
+  console.log(data)
+    // Handle the response data, e.g.
+    document.getElementById("popuponumbertwo").innerHTML = `<button class="close-button" onclick="closeForm2()" >X</button>
+<h1 style="left:22%;" id="poph">Congratulations</h1>
+    <h2 style="left:25%;" id="poph2">You have created a request.</h2>
+<img src="{{ url_for('static', filename='congrats.png') }}" style="top:15%;left:14%;position:absolute;" width="250" height="150">
+<br>
+    <a style="font-size:14px;position:absolute;top:65%;left:10%;">Stay up to date with the status of the request in....</a>
+    <button onclick='location.href="{{ url_for('transactions') }}"' style="border:none;color:white;background: #0288CC;border-radius: 5px;width:70%;height:15%;margin-top:60%;margin-left:15%;"> My Transactions </button>
+</h1>`;
+
+    addAndHighlightRow()
+  });
+});
+////////////
+
+function changerate(){
+comp2 = document.getElementById("brbox").value
+comp3 = document.getElementById("compensation")
+rra = document.getElementById("reverseRequestAmount").innerHTML
+console.log(comp2)
+console.log(comp3)
+console.log(comp3.innerHTML)
+
+cal = rra*comp2
+  document.getElementById("rateref").innerHTML = comp2
+    document.getElementById("rateref2").innerHTML = comp2
+comp3.innerHTML = cal.toFixed(2)
+}
+
+function crchangerate(){
+comp2 = document.getElementById("crbox").value
+comp4 = document.getElementById("cr2bx")
+comp3 = document.getElementById("sr2boxid")
+
+
+console.log(comp2)
+console.log(comp3)
+console.log(comp3.innerHTML)
+
+cal = comp3.innerHTML*comp2
+comp4.innerHTML = cal.toFixed(2)
+}
+
+
+////////
+</script>
+
+</body>
+</html>

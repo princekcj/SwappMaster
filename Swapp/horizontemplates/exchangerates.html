@@ -1,0 +1,540 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="leftbox">
+       <div class="quarterbox">
+           <img src="{{ url_for('static', filename='idpic.png') }}"  width="60" height="60">
+       <h1 id="userid">{{ user.username }}</h1>
+       <a id="accheader">Standard account</a>
+           </div>
+       <div class="divider"></div>
+
+       <div class="quarterbox2">
+           <ul>
+           <li class="sidenavitem">
+                <a href="{{ url_for('trading') }}" class="listb"><img src="{{ url_for('static', filename='tradinghut.png') }}"  width="20" height="20">&nbsp;Trading</a>
+               </li>
+               <li class="sidenavitem1">
+                  <a href="{{ url_for('transactions') }}" class="listb"><img src="{{ url_for('static', filename='wallet.png') }}"  width="20" height="20">&nbsp;My Transactions</a>
+               </li>
+               <li class="sidenavitem2">
+                  <a href="{{ url_for('account') }}" class="listb"><img src="{{ url_for('static', filename='acc.png') }}"  width="20" height="20">&nbsp;My Account</a>
+               </li>
+           </ul>
+           </div>
+            <div class="quarterbox3">
+
+				<a href="{{ url_for('logout') }}" style="right:67%;top:107%;position:absolute;">Log Out <img src="{{ url_for('static', filename='door.png') }}"  width="12" height="12"></a>
+        </div>
+       </div>
+<div id="upbox">
+		<div style="width:340px;height:68px;padding:0px;display:flex;">
+		</div>
+	<div style="justify-content: center;align-items: center;width:100px;height:50px;margin-left:85%; top:10%;display:flex;position:absolute;">
+	</div>
+	<br>
+    <div id="tabbar">
+        <div id="allbar" onclick="swaptablesall()">All Bids</div>
+        <div id="intbar" onclick="swaptablesIntiated({{Intiated}})">Created Bids</div>
+        <div id="recbar" onclick="swaptablesreceived({{Recieved}})">Received Bids</div>
+
+    </div>
+</div>
+<div class="popup" id="popuponumberone">
+     <button class="close-button" onclick="closeForm()" >X</button>
+<h1 style="left:25%;" id="pophv">Cancel Exchange</h1>
+    <h2 style="left:18%;" id="poph2v">Are you sure you want to cancel this exchange?</h2>
+<img src="{{ url_for('static', filename='cancelpage.png') }}" style="top:25%;left:14%;position:absolute;" width="250" height="150">
+    <label id="datastore" style="display:none"></label>
+<br>
+    <button onclick='cancelhelper()' style="border:none;color:white;background: #0288CC;border-radius: 5px;width:70%;height:15%;margin-top:60%;margin-left:15%;"> Cancel</button>
+
+</div>
+<div class="popup" id="popuponumberthree">
+     <button class="close-button" onclick="closeForm()" >X</button>
+<h1 style="left:25%;" id="poph">Complete Exchange</h1>
+    <h2 style="left:18%;" id="poph2">Are you sure you want to complete this exchange? </h2>
+<img src="{{ url_for('static', filename='completechairs.png') }}" style="top:25%;left:14%;position:absolute;" width="250" height="150">
+    <label id="datastore2" style="display:none"></label>
+<br>
+    <button onclick='completehelper()' style="border:none;color:white;background: #0288CC;border-radius: 5px;width:70%;height:15%;margin-top:60%;margin-left:15%;">Complete</button>
+
+</div>
+
+
+
+<div id="centerbox">
+<table class="demTable" id="swaptab">
+		<tbody>
+        {% for item in events %}
+			<tr id="allev" class="allev">
+                <td><a href="{{ url_for('bid_list', request_id=item.requestID ) }}" >#{{item.requestID}}</a></td>
+                {% if item.event_type == 'Bid_REC' %}
+				<td>&nbsp;<img src="{{ url_for('static', filename='recieved.png') }}"  width="20" height="20"></td>
+               {% elif item.event_type == 'Bid_IN' %}
+
+                <td>&nbsp;<img src="{{ url_for('static', filename='sent.png') }}"  width="20" height="20"></td>
+
+                {% elif item.event_type == 'Exchange' %}
+                <td>&nbsp;<img src="{{ url_for('static', filename='xchange.png') }}"  width="20" height="20"></td>
+                {% endif %}
+				<td style="text-align:left;" >{{ item.event_content }}</td>
+
+                {% if item.status == 'Pending' %}
+				<td><img src="{{ url_for('static', filename='pending.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Processing' %}
+				<td><img src="{{ url_for('static', filename='processing.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Complete' %}
+                <td><img src="{{ url_for('static', filename='complete.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Cancelled' %}
+                <td><img src="{{ url_for('static', filename='cancelled.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% endif %}
+
+				<td >{{ item.attachment }}</td>
+				<td>{{ item.amount }}</td>
+				<td>
+                                    <select onchange="myFunction({{ item }}, '{{ item.id }}', '{{ item.requestID }}')" id="drops_{{ item.id }}{{ item.requestID }}" class="drops">
+                      <option></option>
+                 {% if item.event_type == 'Bid_REC'%}
+                                     {% if item._user_idOfEvents == user.id %}
+                      <option value="AcceptBid" >Accept bid</option>
+                                        {% endif %}
+                 {% elif item.event_type == 'Bid_IN' %}
+                      <option value="CancelBid">Cancel Bid</option>
+
+                 {% elif item.event_type == 'Exchange' %}
+                      <option value="IntiateChat">Intiate Chat</option>
+                 {% if item.status == 'Processing' %}
+
+                      <option value="Complete">Complete</option>
+                   {% endif %}
+                 {% endif %}
+                    </select>
+                </td>
+			</tr>
+        {% endfor %}
+        {% for item in Intiated %}
+            {% if item.event_type == 'Bid_IN' %}
+			<tr id="inti" class="inti" style="display:none;">
+
+                <td><a href="{{ url_for('bid_list', request_id=item.requestID ) }}" >#{{item.requestID}}</a></td>
+
+                <td>&nbsp;<img src="{{ url_for('static', filename='sent.png') }}"  width="20" height="20"></td>
+
+
+
+				<td style="text-align:left;" >{{ item.event_content }}</td>
+
+                {% if item.status == 'Pending' %}
+				<td><img src="{{ url_for('static', filename='pending.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Processing' %}
+				<td><img src="{{ url_for('static', filename='processing.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Complete' %}
+                <td><img src="{{ url_for('static', filename='complete.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Cancelled' %}
+                <td><img src="{{ url_for('static', filename='cancelled.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% endif %}
+
+				<td >{{ item.attachment }}</td>
+				<td>{{ item.amount }}</td>
+				<td>
+                    <select onchange="myFunction({{ item }}, '{{ item.id }}', '{{ item.requestID }}')" id="drops_{{ item.id }}{{ item.requestID }}int" class="drops">
+                      <option></option>
+                 {% if item.event_type == 'Bid_IN' %}
+                      <option value="CancelBid">Cancel Bid</option>
+
+                   {% endif %}
+                    </select>
+
+                </td>
+			</tr>
+        {% endif %}
+        {% endfor %}
+                {% for item in Recieved %}
+                {% if item.event_type == 'Bid_REC' %}
+			<tr id="rece" class="rece" style="display:none;">
+                <td><a href="{{ url_for('bid_list', request_id=item.requestID ) }}" >#{{item.requestID}}</a></td>
+				<td>&nbsp;<img src="{{ url_for('static', filename='recieved.png') }}"  width="20" height="20"></td>
+				<td style="text-align:left;" >{{ item.event_content }}</td>
+
+                {% if item.status == 'Pending' %}
+				<td><img src="{{ url_for('static', filename='pending.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Processing' %}
+				<td><img src="{{ url_for('static', filename='processing.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Complete' %}
+                <td><img src="{{ url_for('static', filename='complete.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Cancelled' %}
+                <td><img src="{{ url_for('static', filename='cancelled.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% endif %}
+
+				<td >{{ item.attachment }}</td>
+				<td>{{ item.amount }}</td>
+				<td >
+                    <select onchange="myFunction({{ item }}, {{ item.id }}, {{ item.requestID }})" id="drops_{{ item.id }}{{ item.requestID }}rec" class="drops">
+                      <option></option>
+            {% if item.event_type == 'Bid_REC'%}
+                                     {% if item._user_idOfEvents == user.id %}
+                      <option value="AcceptBid" >Accept bid</option>
+                                        {% endif %}
+
+                        {% endif %}
+                    </select>
+                </td>
+                </tr>
+        {% endif %}
+        {% endfor %}
+		</tbody>
+	</table>
+<div class="allev-pagination" id="allev-pagination">
+    <button class="prevBtn" id="prev-page-btn" data-page="1">Prev</button>
+    <button class="nextBtn" id="next-page-btn" data-page="1" >Next</button>
+</div>
+<div class="init-pagination" id="init-pagination">
+    <button class="prevBtn" id="prev-page-btn" data-page="1" >Prev</button>
+    <button class="nextBtn" id="next-page-btn" data-page="1" >Next</button>
+</div>
+<div class="rece-pagination" id="rece-pagination">
+    <button class="prevBtn" id="prev-page-btn" data-page="1" >Prev</button>
+    <button class="nextBtn" id="next-page-btn" data-page="1" >Next</button>
+</div>
+</div>
+
+
+<script>
+     document.getElementById("v32").innerHTML = "My Transactions"
+
+
+
+     // Show the initial page for the .allev table
+
+     // Get the table rows with the .allev class
+    var allevRows = document.querySelectorAll('.allev');
+    console.log(allevRows)
+
+    // Get the table rows with the .init class
+    var initRows = document.querySelectorAll('.inti');
+
+    // Get the table rows with the .rece class
+    var receRows = document.querySelectorAll('.rece');
+
+    // Get the pagination buttons for the .allev rows
+    var allevPaginationButtons = document.querySelectorAll('.allev-pagination');
+
+    // Get the pagination buttons for the .init rows
+    var initPaginationButtons = document.querySelectorAll('.init-pagination');
+
+    // Get the pagination buttons for the .rece rows
+    var recePaginationButtons = document.querySelectorAll('.rece-pagination');
+
+    // Function to show/hide the relevant rows based on the current page
+function showPage(rows, pageNum, pageSize) {
+  var startIndex = (pageNum - 1) * pageSize;
+  var endIndex = startIndex + pageSize;
+  console.log(startIndex)
+  console.log(endIndex)
+  console.log('ffs')
+  if (startIndex >= rows.length) {
+    startIndex = rows.length - pageSize;
+    endIndex = rows.length;
+  }
+  if (endIndex > rows.length) {
+    endIndex = rows.length;
+  }
+  for (var i = 0; i < rows.length; i++) {
+    if (i >= startIndex && i < endIndex) {
+      rows[i].style.display = '';
+    } else {
+      rows[i].style.display = 'none';
+    }
+  }
+}
+
+
+function addPaginationListeners(paginationButtons, rows, pageSize) {
+  for (var i = 0; i < paginationButtons.length; i++) {
+    (function(i) {
+      var prevButton = paginationButtons[i].querySelector('.prevBtn');
+      var nextButton = paginationButtons[i].querySelector('.nextBtn');
+      var currentPage = parseInt(nextButton.getAttribute('data-page'));
+      showPage(rows, currentPage, pageSize);
+      if (nextButton) {
+        nextButton.addEventListener('click', function() {
+          currentPage++;
+          nextButton.setAttribute('data-page', currentPage);
+          prevButton.setAttribute('data-page', currentPage-1);
+          showPage(rows, currentPage, pageSize);
+        });
+      }
+      if (prevButton) {
+        prevButton.addEventListener('click', function() {
+          currentPage--;
+          nextButton.setAttribute('data-page', currentPage+1);
+          prevButton.setAttribute('data-page', currentPage);
+          showPage(rows, currentPage, pageSize);
+        });
+      }
+    })(i);
+  }
+}
+
+    // Add event listeners to the .allev pagination buttons
+    addPaginationListeners(allevPaginationButtons, allevRows, 10);
+
+    // Add event listeners to the .init pagination buttons
+    addPaginationListeners(initPaginationButtons, initRows, 10);
+
+    // Add event listeners to the .rece pagination buttons
+    addPaginationListeners(recePaginationButtons, receRows, 10);
+
+     function swaptablesIntiated(Intiated){
+
+    document.getElementById("init-pagination").style.display = "flex";
+    document.getElementById("allev-pagination").style.display = "none";
+    document.getElementById("rece-pagination").style.display = "none";
+    console.log(Intiated)
+    if (document.getElementById("inti") !== null ){
+    var elements = document.querySelectorAll("#inti");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "table-row";
+            }
+    }
+    if (document.getElementById("allev") !== null ){
+    var elements = document.querySelectorAll("#allev");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+            }
+    }
+     if (document.getElementById("rece") !== null ){
+        var elements = document.querySelectorAll("#rece");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+            }
+
+    }
+
+     document.getElementById("intbar").style.background = "#0288CC"
+    document.getElementById("allbar").style.background = "#FFFFFF"
+        document.getElementById("recbar").style.background = "#FFFFFF"
+        showPage(initRows,1 , 9);
+    }
+
+    function swaptablesreceived(Received){
+
+    document.getElementById("init-pagination").style.display = "none";
+    document.getElementById("allev-pagination").style.display = "none";
+    document.getElementById("rece-pagination").style.display = "flex";
+    console.log(Received)
+    if (document.getElementById("inti") !== null ){
+           var elements = document.querySelectorAll("#inti");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+            }
+
+     }
+    if (document.getElementById("allev") !== null ){
+   var elements = document.querySelectorAll("#allev");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+            }
+    }
+    if (document.getElementById("rece") !== null ){
+    var elements = document.querySelectorAll("#rece");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "table-row";
+            }
+            showPage(receRows, 1, 9);
+
+            }
+
+     document.getElementById("recbar").style.background = "#0288CC"
+     document.getElementById("intbar").style.background = "#FFFFFF"
+    document.getElementById("allbar").style.background = "#FFFFFF"
+
+    }
+
+     function swaptablesall(){
+
+         document.getElementById("init-pagination").style.display = "none";
+         document.getElementById("allev-pagination").style.display = "flex";
+         document.getElementById("rece-pagination").style.display = "none";
+
+
+        if (document.getElementById("inti") !== null ){
+        var elements = document.querySelectorAll("#inti");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+            }
+        }
+
+     if (document.getElementById("allev") !== null ){
+    var elements = document.querySelectorAll("#allev");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "table-row";
+            }
+    }
+
+    if (document.getElementById("rece") !== null ){
+        var elements = document.querySelectorAll("#rece");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+            }
+            showPage(allevRows, 1, 9);
+}
+     document.getElementById("recbar").style.background = "#FFFFFF"
+     document.getElementById("intbar").style.background = "#FFFFFF"
+    document.getElementById("allbar").style.background = "#0288CC"
+
+    }
+
+function openForm() {
+  document.getElementById("popuponumberone").style.display = "flex";
+}
+function closeForm() {
+  document.getElementById("popuponumberone").style.display = "none";
+}
+function openForm3() {
+  document.getElementById("popuponumberthree").style.display = "flex";
+}
+function closeForm3() {
+  document.getElementById("popuponumberthree").style.display = "none";
+}
+
+
+    function myFunction(json, id, rid) {
+  // get the value of the selected option
+    console.log(document.getElementById('drops_' + id + rid).innerHTML)
+    if(document.getElementById('drops_' + id + rid )){
+    var selectedValue = document.getElementById('drops_' + id + rid).value;
+    } else if(document.getElementById('drops_' + id + rid + 'rec')){
+    console.log('drops_' + id + rid + 'rec')
+    var selectedValue = document.getElementById('drops_' + id + rid + 'rec').value;
+    } else if (document.getElementById('drops_' + id + rid + 'int')){
+    console.log('drops_' + id + rid + 'int')
+    var selectedValue = document.getElementById('drops_' + id + rid + 'int').value;
+    }
+
+  console.log(selectedValue)
+  json1 = {
+    "id": json.id,
+    "corresponding_event_id": json.corresponding_event_id,
+    "_user_idOfEvents": json._user_idOfEvents,
+    "proposed_rate": json.proposed_rate
+  };
+
+  // check if the selected option is "Accept Bid"
+  if (selectedValue === 'AcceptBid') {
+  console.log('picked a')
+    fetch("{{ url_for('accept_bids') }}", {
+      method: "POST",
+      body: JSON.stringify(json1),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    });
+    location.reload();
+  }
+
+   // check if the selected option is "IntiateChat"
+  if (selectedValue === 'IntiateChat') {
+    console.log('picked in')
+    fetch("{{ url_for('intiate_chatfromx') }}", {
+      method: "POST",
+      body: JSON.stringify(json1),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    });
+    location.reload();
+  }
+
+  // check if the selected option is "Cancel Bid"
+  if (selectedValue === 'CancelBid') {
+    console.log('picked canc')
+
+  document.getElementById("datastore").innerHTML = JSON.stringify(json1)
+  console.log(JSON.parse(document.getElementById("datastore").innerHTML))
+  openForm()
+
+  }
+
+  // check if the selected option is "Complete Bid"
+  if (selectedValue === 'Complete') {
+    console.log('picked com')
+     document.getElementById("datastore2").innerHTML = JSON.stringify(json1)
+      openForm3()
+}
+}
+
+function cancelhelper(){
+
+ json1 = JSON.parse(document.getElementById("datastore").innerHTML)
+ console.log(json1)
+fetch("{{ url_for('cancel_bids') }}", {
+      method: "POST",
+      body: JSON.stringify(json1),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    });
+    location.reload();
+
+}
+function completehelper(){
+
+ json1 = JSON.parse(document.getElementById("datastore2").innerHTML)
+fetch("{{ url_for('complete_exchange') }}", {
+      method: "POST",
+      body: JSON.stringify(json1),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+    });
+    location.reload();
+}
+
+    // get all rows in the table
+var rows = document.querySelectorAll('#swaptab tr');
+
+// loop through each row
+for (var i = 0; i < rows.length; i++) {
+  // if the row doesn't have the class 'allev', hide it
+  if (!rows[i].classList.contains('allev')) {
+    rows[i].style.display = 'none';
+  }
+}
+    showPage(allevRows, 1, 9);
+
+</script>
+
+
+{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% if title %}
+        <title>Swapp - {{title}}</title>
+    {% else %}
+        <title>Swapp</title>
+    {% endif %}
+</head>
+
+<body>
+
+
+</body>
+</html>

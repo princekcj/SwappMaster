@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="homeContainer">
+	<a class="statement" style="color:white;">Send money</a>
+	<a class="statement" style="color:orange;margin-top:3%;">Your Way</a>
+<a style="color: white;" class="substatement">Set your own rates. and safely transfer money with others in over 10 different currencies worldwide.</a>
+        <button style="margin-left: 77%; margin-top: 1%;" onclick="location.href='http://127.0.0.1:5000/login'" class="logincard"><a class="logintitle" >LOG IN</a></button>
+<img src="{{ url_for('static', filename='teamwork.png') }}" class="teamworkimg">
+</div>
+<div class="homepagecurrency">
+    <table>
+		<thead>
+			<tr>
+				<th>From/to</th>
+				<th>Currency</th>
+				<th>Spot Rate</th>
+				<th>24H Change</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="fromto">GHS/USD</td>
+				<td id="currency">(US Dollar)</td>
+				<td id="price"  >{{ USDprice }}</td>
+				<td id="usa"  class="figures" >{{ USDchange }}</td>
+			</tr>
+			<tr>
+				<td id="fromto" >GHS/GBP</td>
+				<td id="currency">(British Pound)</td>
+				<td id="price" >{{ GBPprice }}</td>
+				<td id="gbp" class="figures">{{ GBPchange }}</td>
+			</tr>
+			<tr>
+				<td id="fromto" >GHS/EUR</td>
+				<td id="currency">(Euros)</td>
+				<td id="price" >{{EURtoGHS}}</td>
+				<td id="eur" class="figures">{{ EURchange }}</td>
+			</tr>
+			<tr>
+				<td id="fromto" >GHS/CAD</td>
+				<td id="currency">(Canadian Dollars)</td>
+				<td id="price" >{{CADtoGHS}}</td>
+				<td id="cad" class="figures">{{ CADchange }}</td>
+			</tr>
+			<tr>
+				<td id="fromto" >GHS/NGN</td>
+				<td id="currency">(Naira)</td>
+				<td id="price" >{{GHStoNGN}}</td>
+				<td id="ngn" class="figures">{{ NGNchange }}</td>
+			</tr>
+			<tr>
+				<td id="fromto" >JPY/GHS</td>
+				<td id="currency">(Japanese Yen)</td>
+				<td id="price" >{{JPYtoGHS}}</td>
+				<td id="jpy" class="figures">{{ JPYchange }}</td>
+			</tr>
+			<tr>
+				<td id="fromto" >ZAR/GHS</td>
+				<td id="currency">(South African Rand)</td>
+				<td id="price" >{{ZARtoGHS}}</td>
+				<td id="zar" class="figures">{{ ZARchange }}</td>
+			</tr>
+			<tr>
+				<td id="fromto" >CHF/GHS</td>
+				<td id="currency">(Swiss Franc)</td>
+				<td id="price" >{{CHFtoGHS}}</td>
+				<td id="chf" class="figures">{{ CHFchange }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<style>
+	.bg-steel {
+  background-color: #1A4160;
+
+}
+.navtitle{
+color:white;
+}
+#createbox{
+display:none;
+}
+.teamworkimg{
+top: 15%;
+  right: 22%;
+    position: absolute;
+    width: 20%;
+    height: 32%;
+}
+.flags{
+width:20px;
+height:20px;
+}
+@media (max-width: 1100px ) {
+.flags{
+width:15px;
+height:15px;
+}
+.teamworkimg{
+    top: 18%;
+    right: 7%;
+    width: 17%;
+    height: 29%;
+
+}
+}
+</style>
+<script>
+         document.getElementById("v32").style.display = 'none'
+         document.getElementById("ms").style.display = 'none'
+
+  function changeValue(value, element) {
+    if (value < 0) {
+      element.innerHTML = '<img src="{{ url_for('static', filename='negative.png') }}" class="flags">';
+    } else if (value > 0) {
+      element.innerHTML = '<img src="{{ url_for('static', filename='positive.png') }}" class="flags">';
+    } else {
+      element.innerHTML = '<img src="{{ url_for('static', filename='sameval.png') }}" class="flags">';
+    }
+  }
+
+  changeValue(parseFloat(document.getElementById("usa").innerHTML), document.getElementById("usa"));
+  changeValue(parseFloat(document.getElementById("gbp").innerHTML), document.getElementById("gbp"));
+  changeValue(parseFloat(document.getElementById("eur").innerHTML), document.getElementById("eur"));
+  changeValue(parseFloat(document.getElementById("cad").innerHTML), document.getElementById("cad"));
+  changeValue(parseFloat(document.getElementById("ngn").innerHTML), document.getElementById("ngn"));
+  changeValue(parseFloat(document.getElementById("jpy").innerHTML), document.getElementById("jpy"));
+  changeValue(parseFloat(document.getElementById("zar").innerHTML), document.getElementById("zar"));
+  changeValue(parseFloat(document.getElementById("chf").innerHTML), document.getElementById("chf"));
+
+</script>
+{% endblock content %}

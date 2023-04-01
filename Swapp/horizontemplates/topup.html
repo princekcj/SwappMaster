@@ -1,0 +1,549 @@
+{% extends "layout.html" %}
+
+
+
+{% block content %}
+   <div id="leftbox">
+       <div class="quarterbox">
+           <img src="{{ url_for('static', filename='idpic.png') }}"  width="60" height="60">
+       <h1 id="userid">{{ user.username }}</h1>
+       <a id="accheader">Standard account</a>
+           </div>
+       <div class="divider"></div>
+
+       <div class="quarterbox2">
+           <ul>
+           <li class="sidenavitem">
+                <a href="{{ url_for('trading') }}" class="listb"><img src="{{ url_for('static', filename='tradinghut.png') }}"  width="20" height="20">&nbsp;Trading</a>
+               </li>
+               <li class="sidenavitem1">
+                  <a href="{{ url_for('transactions') }}" class="listb"><img src="{{ url_for('static', filename='wallet.png') }}"  width="20" height="20">&nbsp;My Transactions</a>
+               </li>
+               <li class="sidenavitem2">
+                  <a href="{{ url_for('account') }}" class="listb"><img src="{{ url_for('static', filename='acc.png') }}"  width="20" height="20">&nbsp;My Account</a>
+               </li>
+           </ul>
+           </div>
+            <div class="quarterbox3">
+
+				<a href="{{ url_for('logout') }}" style="right:67%;top:107%;position:absolute;">Log Out <img src="{{ url_for('static', filename='door.png') }}"  width="12" height="12"></a>
+        </div>
+       </div>
+   </div>
+<div id="upbox">
+		<div style="width:340px;height:68px;padding:0px;display:flex;">
+		</div>
+	<br>
+	<a id="trade">Trading</a>
+
+
+</div>
+
+////
+<div class="popup" id="popuponumberone">
+     <button class="close-button" onclick="closeForm()" >X</button>
+<h1 id="poph">Request Details</h1>
+    <h2 id="poph2">Choice to go with system rate, or create your own rate</h2>
+    <p id="systemr">System Rate <div id="srbox"></div> </p>
+    <form id="bidform" method="post" >
+    <p id="Br">Bidding Rate<input onchange="changerate()" name="bidrate" type="text" id="brbox"> </p>
+        <div class="centbox">
+            <div id="flip">
+                <div id="giveflip">
+                <a style="font-size:12px;margin-left:10px;">Giving</a>
+                <a name="passrequestid" id="passrequestid" style="display:none;"></a>
+                <br>
+                <br>
+                <a id="reverseRequestAmount" style="display:inline-block;margin-left:10px;font-family: 'Open Sans';font-style: normal;font-weight: 600;font-size: 18px;color: #575757;">500</a> <div id="requestr">
+                <div onchange="rate2()" name="currencycreate" style="font-size:16px; text-align:center;" id="currenci">
+                </div>
+
+  </div>
+            </div>
+                <br>
+                <a id="rateref" style="font-size:12px;font-weight:600px;display:none;margin-left:10px;">9.45</a>
+
+            <div id="recievingflip">
+                <a style="top:10%;font-size:12px;margin-left:10px;">Recieving</a>
+                <br>
+                <br>
+                <a id="compensation" style="margin-left:10px;font-family: 'Open Sans';font-style: normal;font-weight: 600;font-size: 18px;color: #575757;">10000</a>
+                <div name="requestg" style="font-size:16px;" id="requestg">
+
+            </div>
+                <br>
+                <a id="rateref2" style="font-size:12px;font-weight:400px;margin-left:10px;display:none;">9.45</a>
+            </div>
+            </div>
+            <br>
+
+            <input id="acceptrequest" type="submit" value="Accept">
+        </div>
+
+
+
+    </form>
+</div>
+
+<div id="centerbox">
+
+<table class="demTable" id="demTable">
+		<thead>
+  <tr>
+    <th><br></th>
+    <th class="sort">User ID <i class="fas fa-sort-down"></i></th>
+    <th class="no-sort"><span style="font-style: normal; font-weight: 700;">Base Currency</span></th>
+    <th class="no-sort"><span style="font-style: normal; font-weight: 700;">New Currency</span></th>
+    <th class="sort"><span style="font-style: normal; font-weight: 700;">Request Amount</span> <i class="fas fa-sort-down"></i></th>
+    <th class="no-sort"><span style="font-style: normal; font-weight: 700;">Rate</span></th>
+    <th class="sort"><span style="font-style: normal; font-weight: 700;">Date Posted</span> <i class="fas fa-sort-down"></i></th>
+    <th></th>
+  </tr>
+</thead>
+		<tbody style="overflow-y: auto; ">
+		{% for request in Requests %}
+        {% if request.Fulfilled == 'False' %}
+			<tr>
+                {% if request.ActiveBids %}
+				<td>&nbsp;<div id="bidball">{{ request.ActiveBids }}</div></td>
+                {% elif request.ActiveBids == 0 %}
+				<td>&nbsp;<div id="bidballnone">{{ request.ActiveBids }}</div></td>
+                {% endif %}
+				<td >#{{ request.Requester_user_id }}</td>
+				<td id="base">{{ request.BaseCurrency }}</td>
+				<td id="native" >{{ request.NewCurrency }}</td>
+				<td>{{ request.RequestAmount }} {{ request.BaseCurrency }}</td>
+				<td class="rate">{{ request.Rate }}</td>
+				<td class="date">{{ request.date_posted  }}</td>
+				<td class="accpt" style="cursor: pointer;background-color: #0288CC;"><a onclick="MakeBid({{ request }})" style="cursor:pointer;color:white;">Accept</a></td>
+			</tr>
+        {% endif %}
+		{% endfor %}
+		</tbody>
+	</table>
+
+    <button class="prevBtn" id="prevBtn">Back</button>
+<button class="nextBtn" id="nextBtn">Next</button>
+</div>
+       <script >
+
+// get all elements with class "date"
+const rateElems = document.querySelectorAll('.rate');
+
+// loop through each element and format the date
+rateElems.forEach(rateElem => {
+  const rateStr = rateElem.innerHTML;
+  const ratenum = Number(rateStr)
+  const rateObj = (ratenum).toFixed(2)
+  const formattedrate = rateObj
+  rateElem.innerHTML = formattedrate;
+});
+
+
+// get all elements with class "date"
+const dateElems = document.querySelectorAll('.date');
+
+// loop through each element and format the date
+dateElems.forEach(dateElem => {
+  const dateStr = dateElem.innerHTML;
+  const dateObj = new Date(dateStr);
+  const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  dateElem.innerHTML = formattedDate;
+});
+
+        function openForm() {
+
+         var baseCurInput = document.getElementById("requestg")
+         console.log(baseCurInput)
+  base = baseCurInput.innerHTML
+  console.log(base)
+
+    var CurInput = document.getElementsByName("currencycreate")[0]
+    console.log(CurInput)
+  nonbase = CurInput.innerHTML
+  console.log(nonbase)
+
+  if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGHS }}
+  document.getElementById("rateref2").innerHTML = {{ USDtoGHS }}
+
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("srbox").innerHTML = {{ GHStoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GHStoUSD }}
+   document.getElementById("rateref2").innerHTML = {{ GHStoUSD }}
+
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("srbox").innerHTML = {{ GBPtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoGHS }}
+    document.getElementById("rateref2").innerHTML = {{ GBPtoGHS }}
+
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ GHStoGBP }}
+  document.getElementById("rateref").innerHTML = {{ GHStoGBP }}
+    document.getElementById("rateref2").innerHTML = {{ GHStoGBP }}
+
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGBP }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGBP }}
+    document.getElementById("rateref2").innerHTML = {{ USDtoGBP }}
+
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = {{ GBPtoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoUSD }}
+    document.getElementById("rateref2").innerHTML = {{ GBPtoUSD }}
+
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+    document.getElementById("rateref2").innerHTML = 1
+
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+    document.getElementById("rateref2").innerHTML = 1
+
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+    document.getElementById("rateref2").innerHTML = 1
+
+  }
+  document.getElementById("popuponumberone").style.display = "flex";
+}
+function closeForm() {
+  document.getElementById("popuponumberone").style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  let modal = document.getElementById('ms');
+  if (event.target == modal) {
+    closeForm();
+  }
+}
+
+/////////////////
+        function openForm2() {
+    var baseCurInput = document.getElementsByName("currencycreate1")[0]
+  base = baseCurInput.value
+
+    var CurInput = document.getElementsByName("currencycreate2")[0]
+  nonbase = CurInput.value
+
+  if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoGHS }}
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }
+
+
+  document.getElementById("popuponumbertwo").style.display = "flex";
+}
+function closeForm2() {
+  document.getElementById("popuponumbertwo").style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  let modal = document.getElementById('userid');
+  if (event.target == modal) {
+    closeForm2();
+  }
+}
+///////////
+function rate2(){
+   var baseCurInput = document.getElementById("requestg")
+         console.log(baseCurInput)
+  base = baseCurInput.innerHTML
+  console.log(base)
+
+    var CurInput = document.getElementsByName("currencycreate")[0]
+  nonbase = CurInput.innerHTML
+
+  if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGHS }}
+  document.querySelector("a#rateref").innerHTML ={{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("srbox").innerHTML = {{ GHStoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GHStoUSD }}
+  document.querySelector("a#rateref").innerHTML ={{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("srbox").innerHTML = {{ GBPtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoGHS }}
+   document.querySelector("a#rateref").innerHTML ={{ GHStoUSD }}
+
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ GHStoGBP }}
+  document.getElementById("rateref").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGBP }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = {{ GBPtoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  }
+}
+
+function rate(){
+var baseCurInput = document.getElementsByName("currencycreate1")[0]
+  base = baseCurInput.value
+
+    var CurInput = document.getElementsByName("currencycreate2")[0]
+  nonbase = CurInput.value
+
+if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoGHS }}
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }
+}
+////////////
+
+function changerate(){
+comp2 = document.getElementById("brbox").value
+comp3 = document.getElementById("compensation")
+rra = document.getElementById("reverseRequestAmount").innerHTML
+console.log(comp2)
+console.log(comp3)
+console.log(comp3.innerHTML)
+
+cal = rra*comp2
+  document.getElementById("rateref").innerHTML = comp2
+    document.getElementById("rateref2").innerHTML = comp2
+comp3.innerHTML = cal.toFixed(2)
+}
+
+function crchangerate(){
+comp2 = document.getElementById("crbox").value
+comp4 = document.getElementById("cr2bx")
+comp3 = document.getElementById("sr2boxid")
+
+
+console.log(comp2)
+console.log(comp3)
+console.log(comp3.innerHTML)
+
+cal = comp3.innerHTML*comp2
+comp4.innerHTML = cal.toFixed(2)
+}
+
+
+////////
+ async function MakeBid(request){
+        console.log(request)
+
+
+    let rate
+    let req
+    let passindata
+    rramount = document.getElementById("reverseRequestAmount")
+    comp = document.getElementById("compensation")
+    base = document.getElementById("requestg")
+    new1 = document.getElementsByName("currencycreate")[0]
+    passin = document.getElementById("passrequestid")
+
+     passindata = request.id
+     basecurr = request.BaseCurrency
+     newcurr = request.NewCurrency
+     req = request.RequestAmount
+     rate = await document.getElementById("srbox").innerHTML
+     console.log(rate)
+
+     compensate = req*rate
+    console.log(req)
+
+      passin.innerHTML = passindata
+     rramount.innerHTML = req
+     comp.innerHTML = compensate.toFixed(2)
+     new1.innerHTML = newcurr
+     base.innerHTML = basecurr
+
+
+    openForm()
+}
+//////
+document.getElementById("bidform").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+     const define_form = {
+     "passrequestid" :document.getElementById("passrequestid").innerHTML,
+     "compensation": document.getElementById("compensation").innerHTML,
+     "currenci": document.getElementById("currenci").value,
+     "bidrate" : document.getElementById("brbox").value
+
+     }
+
+  var formData = new FormData(this);
+    console.log(define_form)
+  fetch("{{ url_for('make_bids') }}", {
+    method: "POST",
+    body: JSON.stringify(define_form),
+    headers: {     "Content-Type": "application/json"   }
+  })
+  .then(response => response.json())
+  .then(data => {
+  console.log(data)
+    // Handle the response data, e.g.
+    document.getElementById("popuponumberone").innerHTML = `<button class="close-button" onclick="closeForm()" >X</button>
+<h1 style="left:22%;" id="poph">Congratulations</h1>
+    <h2 style="left:24%;" id="poph2">You have accepted the request.</h2>
+<img src="{{ url_for('static', filename='congrats.png') }}" style="top:15%;left:14%;position:absolute;" width="250" height="150">
+<br>
+    <a style="font-size:14px;position:absolute;top:65%;left:10%;">Stay up to date with the status of the request in....</a>
+    <button onclick='location.href="{{ url_for('transactions') }}"' style="border:none;color:white;background: #0288CC;border-radius: 5px;width:70%;height:15%;margin-top:60%;margin-left:15%;"> My Transactions </button>
+`;
+  });
+});
+
+function addAndHighlightRow() {
+  var table = document.getElementsByClassName("demTable")[0];
+  var newRow = table.insertRow(1);
+  var cell1 = newRow.insertCell(0);
+  var cell2 = newRow.insertCell(1);
+  var cell3 = newRow.insertCell(2);
+  var cell4 = newRow.insertCell(3);
+  var cell5 = newRow.insertCell(4);
+  var cell6 = newRow.insertCell(5);
+  var cell7 = newRow.insertCell(6);
+  var cell8 = newRow.insertCell(7);
+  cell1.innerHTML = "&nbsp;<div id='bidballnone'>0</div>";
+  cell2.innerHTML = "New User ID";
+  cell3.innerHTML = "New Base Currency";
+  cell4.innerHTML = "New New Currency";
+  cell5.innerHTML = "New Request Amount New Currency";
+  cell6.innerHTML = "New Rate";
+  cell7.innerHTML = "New Date Posted";
+  cell8.innerHTML = '<td style="background-color: #0288CC;"><a style="cursor:pointer;color:white;">Accept</a></td>';
+  newRow.style.backgroundColor = "green";
+}
+const rowsPerPage = 6;
+let currentPage = 1;
+function renderTable() {
+  const tableBody = document.querySelector('.demTable tbody');
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const rows = tableBody.querySelectorAll('tr');
+  for (let i = 0; i < rows.length; i++) {
+    if (i >= startIndex && i < endIndex) {
+      rows[i].style.display = '';
+    } else {
+      rows[i].style.display = 'none';
+    }
+  }
+}
+
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderTable();
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  const tableBody = document.querySelector('.demTable tbody');
+  const numRows = tableBody.querySelectorAll('tr').length;
+  const lastPage = Math.ceil(numRows / rowsPerPage);
+  if (currentPage < lastPage) {
+    currentPage++;
+    renderTable();
+  }
+});
+
+renderTable();
+
+ var table = document.getElementById("demTable");
+var rows = table.getElementsByTagName("tr");
+var sortColumn = "userid"; // default sort column
+
+// attach click event listeners to table head cells
+var headers = table.getElementsByTagName("th");
+for (var i = 0; i < headers.length; i++) {
+  headers[i].addEventListener("click", function() {
+    var colId = this.getAttribute("id");
+    if (colId === sortColumn) {
+      // if clicked column is already the sort column, reverse the sort order
+      rows[0].parentNode.insertBefore(rows[rows.length - 1], rows[0]);
+      rows = Array.prototype.slice.call(rows, 0).reverse();
+    } else if (colId !== "basecurrency" && colId !== "newcurrency" && colId !== "rate") {
+      // sort table data based on the clicked column, but not for basecurrency, newcurrency, and rate columns
+      var colIndex = Array.prototype.slice.call(this.parentNode.children).indexOf(this);
+      var rowsArray = Array.prototype.slice.call(rows, 1); // skip the header row
+      rowsArray.sort(function(a, b) {
+        var aVal = a.children[colIndex].textContent;
+        var bVal = b.children[colIndex].textContent;
+        return aVal.localeCompare(bVal, undefined, {numeric: true, sensitivity: "base"});
+      });
+      table.tBodies[0].appendChild(rows[0]); // append the header row
+      for (var i = 0; i < rowsArray.length; i++) {
+        table.tBodies[0].appendChild(rowsArray[i]);
+      }
+      sortColumn = colId;
+      rows = table.getElementsByTagName("tr");
+    }
+  });
+}
+
+
+        </script>
+<style>
+    .alert{
+    top:20%;
+    }
+</style>
+{% endblock content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+   {% if title %}
+        <title>Swapp - {{title}}</title>
+    {% else %}
+        <title>Swapp</title>
+    {% endif %}
+</head>
+<body>
+
+</body>
+</html>

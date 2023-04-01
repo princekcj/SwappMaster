@@ -1,0 +1,404 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="leftbox">
+       <div class="quarterbox">
+           <img src="{{ url_for('static', filename='idpic.png') }}"  width="60" height="60">
+       <h1 id="userid">{{ user.username }}</h1>
+       <a id="accheader">Standard account</a>
+           </div>
+       <div class="divider"></div>
+
+       <div class="quarterbox2">
+           <ul>
+           <li class="sidenavitem">
+                <a href="{{ url_for('trading') }}" class="listb"><img src="{{ url_for('static', filename='tradinghut.png') }}"  width="20" height="20">&nbsp;Trading</a>
+               </li>
+               <li class="sidenavitem1">
+                  <a href="{{ url_for('transactions') }}" class="listb"><img src="{{ url_for('static', filename='wallet.png') }}"  width="20" height="20">&nbsp;My Transactions</a>
+               </li>
+               <li class="sidenavitem2">
+                  <a href="{{ url_for('account') }}" class="listb"><img src="{{ url_for('static', filename='acc.png') }}"  width="20" height="20">&nbsp;My Account</a>
+               </li>
+           </ul>
+           </div>
+            <div class="quarterbox3">
+
+				<a href="{{ url_for('logout') }}" style="right:67%;top:107%;position:absolute;">Log Out <img src="{{ url_for('static', filename='door.png') }}"  width="12" height="12"></a>
+        </div>
+       </div>
+   </div>
+<div id="upbox">
+		<div style="width:340px;height:68px;padding:0px;display:flex;">
+		</div>
+	<div style="justify-content: center;align-items: center;width:100px;height:50px;margin-left:85%; top:10%;display:flex;position:absolute;">
+	</div>
+	<a id="ms" >Check out the latest updates  </a>
+	<br>
+    <h1 class="v32:740">All Bids for request #{{request.id}}</h1>
+    <br>
+    <img src="{{ url_for('static', filename='vase.png') }}" style="top:43%;left:69%;position:absolute;" width="170" height="190">
+</div>
+<div class="popup2box" id="popuponumbertwo">
+    <button class="close-button" onclick="closeForm2()">X</button>
+<h1 id="popbox2h" style="margin-left:10%;">Creating a new request</h1>
+    <h2 id="popbox2h2"  style="margin-left:15%;">Create a brand new exchange request</h2>
+    <form id="createform">
+        <div style="height: 65px;width: 99%;top:24%;left: 0.1%;border-radius: 5px;position:absolute;background: #F3FBFF;border-radius: 5px;"></div>
+    <label style="position:absolute;top:23%;left:19%;">You send:</label>
+    <input  name="amount" onchange="crchangerate()" placeholder="Amount" type="text" id="crbox"><img style="margin-top:86px;margin-left:180px;" src="{{ url_for('static', filename='arrowside.png') }}"  width="20" height="20">
+        <div id="requestcrup">
+        <select onchange="rate()" name="currencycreate1" id="currenci">
+                        <optgroup >
+    <option value="USD">USD</option>
+    <option value="GHS">GHS</option>
+    <option value="GBP">GBP</option>
+                        </optgroup>
+  </select>
+    </div>
+        <br>
+        <h2 class="crsr">System Rate</h2> <div name="sr2boxid" id="sr2boxid" class="sr2box">1.00</div>
+                <div style="height: 56px;width: 99%;top:61%;left: 0.1%;border-radius: 5px;position:absolute;background: #F6F6F6;border-radius: 5px;"></div>
+    <label style="position:absolute;top:59%;left:19%;">You receive:</label>
+    <div id="cr2bx" class="create2box">0.00</div><img style="margin-top:86px;display:inline;margin-left:180px;" src="{{ url_for('static', filename='arrowside.png') }}"  width="20" height="20">
+    <div class="repreq">
+        <select onchange="rate()" name="currencycreate2" id="currenci">
+                        <optgroup >
+    <option value="USD" >USD</option>
+    <option value="GHS" >GHS</option>
+    <option value="GBP">GBP</option>
+                        </optgroup>
+  </select>
+    </div>
+        <input style="left:62.5px;" id="acceptrequest" type="submit" value="Create Request">
+    </form>
+</div>
+<div class="popup" id="popuponumberone">
+     <button class="close-button" onclick="closeForm()" >X</button>
+<h1 style="left:22%;" id="poph">Congratulations</h1>
+    <h2 style="left:24%;" id="poph2">You have accepted the bid for this request.</h2>
+<img src="{{ url_for('static', filename='congrats.png') }}" style="top:15%;left:14%;position:absolute;" width="250" height="150">
+<br>
+    <a style="font-size:14px;position:absolute;top:65%;left:10%;">Stay up to date with the status of the request in....</a>
+    <button onclick='location.href="{{ url_for('transactions') }}"' style="border:none;color:white;background: #0288CC;border-radius: 5px;width:70%;height:15%;margin-top:60%;margin-left:15%;"> My Transactions </button>
+
+</div>
+
+<div id="centerbox">
+
+
+<table class="demTable" id="swaptab">
+		<tbody>
+        {% if current_user.id == request.Requester_user_id %}
+        {% for item in Active_bids %}
+
+			<tr id="allev">
+                <td>#{{item.request_id}}</td>
+				<td>&nbsp;<img src="{{ url_for('static', filename='recieved.png') }}"  width="20" height="20"></td>
+
+                <td>&nbsp;Recieved bid from {{item.bidder_user_id}}</td>
+
+                {% if item.status == 'Pending' %}
+				<td><img src="{{ url_for('static', filename='pending.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Processing' %}
+				<td><img src="{{ url_for('static', filename='processing.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Complete' %}
+                <td><img src="{{ url_for('static', filename='complete.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% elif item.status == 'Cancelled' %}
+                <td><img src="{{ url_for('static', filename='cancelled.png') }}"  width="6" height="6">  {{ item.status }}</td>
+                {% endif %}
+
+				<td>{{ item.BidAmount }}</td>
+                <td style="background-color: green;"><a onclick='chat({{item.request_id}},{{item.bidder_user_id}})' style="cursor:pointer;">Intiate Chat</a></td>
+                 <td style="background-color: #0288CC;"><a onclick="myFunction({{ item.userevent }})" style="cursor:pointer;">Accept</a></td>
+			</tr>
+        {% endfor %}
+        {% endif %}
+		</tbody>
+	</table>
+    <button id="prevBtn">Back</button>
+    <button id="nextBtn">Next</button>
+</div>
+<script>
+
+document.getElementById("v32").innerHTML = "My Transactions"
+function openForm() {
+  document.getElementById("popuponumberone").style.display = "flex";
+}
+function closeForm() {
+  document.getElementById("popuponumberone").style.display = "none";
+}
+
+////////////////
+        function openForm2() {
+    var baseCurInput = document.getElementsByName("currencycreate1")[0]
+  base = baseCurInput.value
+
+    var CurInput = document.getElementsByName("currencycreate2")[0]
+  nonbase = CurInput.value
+
+  if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoGHS }}
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }
+
+
+  document.getElementById("popuponumbertwo").style.display = "flex";
+}
+function closeForm2() {
+  document.getElementById("popuponumbertwo").style.display = "none";
+}
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+  let modal = document.getElementById('userid');
+  if (event.target == modal) {
+    closeForm2();
+  }
+}
+///////////
+function rate2(){
+   var baseCurInput = document.getElementById("requestg")
+         console.log(baseCurInput)
+  base = baseCurInput.innerHTML
+  console.log(base)
+
+    var CurInput = document.getElementsByName("currencycreate")[0]
+  nonbase = CurInput.innerHTML
+
+  if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGHS }}
+  document.querySelector("a#rateref").innerHTML ={{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("srbox").innerHTML = {{ GHStoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GHStoUSD }}
+  document.querySelector("a#rateref").innerHTML ={{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("srbox").innerHTML = {{ GBPtoGHS }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoGHS }}
+   document.querySelector("a#rateref").innerHTML ={{ GHStoUSD }}
+
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ GHStoGBP }}
+  document.getElementById("rateref").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = {{ USDtoGBP }}
+  document.getElementById("rateref").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = {{ GBPtoUSD }}
+  document.getElementById("rateref").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("srbox").innerHTML = 1
+  document.getElementById("rateref").innerHTML = 1
+  }
+}
+
+function rate(){
+var baseCurInput = document.getElementsByName("currencycreate1")[0]
+  base = baseCurInput.value
+
+    var CurInput = document.getElementsByName("currencycreate2")[0]
+  nonbase = CurInput.value
+
+if (base == "USD" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGHS }}
+  } else if (base == "GHS" && nonbase == "USD") {
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoUSD }}
+  } else if (base == "GBP" && nonbase == "GHS") {
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoGHS }}
+  } else if (base == "GHS" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ GHStoGBP }}
+  } else if (base == "USD" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = {{ USDtoGBP }}
+  } else if (base == "GBP" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = {{ GBPtoUSD }}
+  } else if (base == "USD" && nonbase == "USD"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  } else if (base == "GBP" && nonbase == "GBP"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }else if (base == "GHS" && nonbase == "GHS"){
+  document.getElementById("sr2boxid").innerHTML = 1
+  }
+}
+///////////
+
+
+document.getElementById("createform").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+   json = { "sr2boxid" :document.getElementById("sr2boxid").innerHTML,
+                "currencycreate2" : document.getElementsByName("currencycreate2")[0].value,
+           "currencycreate1" : document.getElementsByName("currencycreate1")[0].value,
+           "amount" : document.getElementById("cr2bx").innerHTML
+
+   }
+   console.log(json)
+  var formData = new FormData(this);
+   console.log(formData)
+  fetch("{{ url_for('create_request') }}", {
+    method: "POST",
+    body: JSON.stringify(json),
+    headers: {     "Content-Type": "application/json"   }
+  })
+  .then(response => response.json())
+  .then(data => {
+  console.log(data)
+    // Handle the response data, e.g.
+    document.getElementById("popuponumbertwo").innerHTML = `<button class="close-button" onclick="closeForm()" >X</button>
+    <h1>Congratulations! Request Has Been Successfully Created!</h1>`;
+  });
+});
+////////////
+
+function changerate(){
+comp2 = document.getElementById("brbox").value
+comp3 = document.getElementById("compensation")
+rra = document.getElementById("reverseRequestAmount").innerHTML
+console.log(comp2)
+console.log(comp3)
+console.log(comp3.innerHTML)
+
+cal = rra*comp2
+  document.getElementById("rateref").innerHTML = comp2
+    document.getElementById("rateref2").innerHTML = comp2
+comp3.innerHTML = cal
+}
+
+function crchangerate(){
+comp2 = document.getElementById("crbox").value
+comp4 = document.getElementById("cr2bx")
+comp3 = document.getElementById("sr2boxid")
+
+
+console.log(comp2)
+console.log(comp3)
+console.log(comp3.innerHTML)
+
+cal = comp3.innerHTML*comp2
+comp4.innerHTML = cal
+}
+
+    function myFunction(json) {
+    console.log(json)
+
+  // check if the selected option is Option 1
+      json1 = {
+    "id": json.id,
+    "corresponding_event_id": json.corresponding_event_id,
+    "_user_idOfEvents": json._user_idOfEvents,
+    "proposed_rate": json.proposed_rate
+  };
+
+    fetch("{{ url_for('accept_bids') }}", {
+    method: "POST",
+    body: JSON.stringify(json1),
+    headers: {     "Content-Type": "application/json"   }
+  })
+  .then(response => response.json())
+  .then(data => {
+  console.log(data)
+
+  });
+  openForm()
+
+  }
+
+  const rowsPerPage = 10;
+let currentPage = 1;
+function renderTable() {
+  const tableBody = document.querySelector('.demTable tbody');
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  const rows = tableBody.querySelectorAll('tr');
+  for (let i = 0; i < rows.length; i++) {
+    if (i >= startIndex && i < endIndex) {
+      rows[i].style.display = '';
+    } else {
+      rows[i].style.display = 'none';
+    }
+  }
+}
+
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+prevBtn.addEventListener('click', () => {
+  if (currentPage > 1) {
+    currentPage--;
+    renderTable();
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  const tableBody = document.querySelector('.demTable tbody');
+  const numRows = tableBody.querySelectorAll('tr').length;
+  const lastPage = Math.ceil(numRows / rowsPerPage);
+  if (currentPage < lastPage) {
+    currentPage++;
+    renderTable();
+  }
+});
+
+renderTable();
+
+ function chat(val1, val2) {
+
+  // check if the selected option is Option 1
+      json1 = {
+    "id_of_request": val1,
+    "bidder_user_id": val2,
+  };
+
+    fetch("{{ url_for('intiate_chat') }}", {
+    method: "POST",
+    body: json1,
+    headers: {     "Content-Type": "application/json"   }
+  })
+  .then(response => response.json())
+  .then(data => {
+  console.log(data)
+
+  });
+  location.reload();
+
+  }
+</script>
+
+
+{% endblock content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% if title %}
+        <title>Swapp - {{title}}</title>
+    {% else %}
+        <title>Swapp</title>
+    {% endif %}
+</head>
+
+<body>
+
+
+</body>
+</html>

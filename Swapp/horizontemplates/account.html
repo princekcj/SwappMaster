@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div id="leftbox">
+       <div class="quarterbox">
+           <img src="{{ url_for('static', filename='idpic.png') }}"  width="60" height="60">
+       <h1 id="userid">{{ user.username }}</h1>
+       <a id="accheader">Standard account</a>
+           </div>
+       <div class="divider"></div>
+
+       <div class="quarterbox2">
+           <ul>
+           <li class="sidenavitem">
+                <a href="{{ url_for('trading') }}" class="listb"><img src="{{ url_for('static', filename='tradinghut.png') }}"  width="20" height="20">&nbsp;Trading</a>
+               </li>
+               <li class="sidenavitem1">
+                  <a href="{{ url_for('transactions') }}" class="listb"><img src="{{ url_for('static', filename='wallet.png') }}"  width="20" height="20">&nbsp;My Transactions</a>
+               </li>
+               <li class="sidenavitem2">
+                  <a href="{{ url_for('account') }}" class="listb"><img src="{{ url_for('static', filename='acc.png') }}"  width="20" height="20">&nbsp;My Account</a>
+               </li>
+           </ul>
+           </div>
+            <div class="quarterbox3">
+
+				<a href="{{ url_for('logout') }}" style="right:67%;top:107%;position:absolute;">Log Out <img src="{{ url_for('static', filename='door.png') }}"  width="12" height="12"></a>
+        </div>
+       </div>
+   </div>
+<div id="upbox2">
+		<div style="width:340px;height:68px;padding:0px;display:flex;">
+		</div>
+	<div style="justify-content: center;align-items: center;width:100px;height:50px;margin-left:85%; top:10%;display:flex;position:absolute;">
+
+	</div>
+	<a id="ms" >Account settings all in one place</a>
+	<br>
+    <div class="accountbox">
+    <div class="editprof">
+    <div >
+        <form style="padding:5px;" method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+
+                <div class="form-group">
+                    {{ form.username.label(class="form-control-label") }}
+
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control accfield is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.username.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="form-control accfield") }}
+                    {% endif %}
+                </div>
+                 <div class="form-group">
+                    {{ form.location.label(class="form-control-label") }}
+
+                    {% if form.location.errors %}
+                        {{ form.location(class="form-control accfield is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.location.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.location(class="form-control accfield") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.phone.label(class="form-control-label") }}
+
+                    {% if form.phone.errors %}
+                        {{ form.phone(class="form-control accfield is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.phone.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.phone(class="form-control accfield") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.email.label(class="form-control-label") }}
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control accfield is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control accfield") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    </div>
+        <div class="changepw">
+      <div >
+        <form style="padding:2px;" method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group" style="height:50%;">
+
+                <div class="form-group">
+                    {{ form.current_password.label(class="form-control-label") }}
+
+                    {% if form.current_password.errors %}
+                        {{ form.current_password(class="form-control accfield is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.current_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.current_password(class="form-control accfield") }}
+                    {% endif %}
+                </div>
+                 <div class="form-group">
+                    {{ form.password.label(class="form-control-label") }}
+
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control accfield is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control accfield") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.confirm_password.label(class="form-control-label") }}
+
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control accfield is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control accfield") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn signinbutton" ,style="width:100%;") }}
+            </div>
+        </form>
+          <img src="{{ url_for('static', filename='laptop.png') }}"  width="230" height="133">
+    </div>
+
+        </div>
+
+    </div>
+</div>
+<script>
+    document.getElementById("v32").innerHTML = "My Account"
+    document.getElementById("ms").innerHTML = "Account settings in one place"
+</script>
+
+{% endblock content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   {% if title %}
+        <title>Horizon - {{title}}</title>
+    {% else %}
+        <title>Horizon</title>
+    {% endif %}
+</head>
+<body>
+
+</body>
+</html>
