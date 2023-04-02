@@ -553,7 +553,6 @@ def secondhalf(results):
     except KeyError:
         results['CADtoGHSRate'] = 0
 
-    time.sleep(60)
 
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=NGN&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
@@ -595,6 +594,7 @@ def job():
     )
     result = ts.as_json()
     results['USDtoGHSRate'] = result['rate']
+    time.sleep(60)
 
     # Construct the necessary time series
     ts = td.exchange_rate(
