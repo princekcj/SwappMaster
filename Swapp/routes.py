@@ -724,7 +724,8 @@ def job7():
 job()
 # Start the scheduler in the background
 scheduler = BackgroundScheduler()
-scheduler.add_job(job, 'interval', minutes=10)
+scheduler.start()
+scheduler.add_job(job, 'interval', minutes=5)
 # Add the second job to run 5 minutes after the first job
 scheduler.add_job(job1, 'interval', minutes=2)
 scheduler.add_job(job2, 'interval', minutes=1)
@@ -757,7 +758,7 @@ scheduler.add_job(job26, 'interval', minutes=2)
 
 
 # Add the third job to run 5 minutes after the second job
-scheduler.start()
+
 
 
 # Stop the scheduler when the Flask application shuts down
