@@ -246,8 +246,10 @@ def job16():
         # Print the most recent percent change
         results['GHSbaseCADchange'] = most_recent_percent_change
 def job17():
+
         # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-        url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CAD&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
+    url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CAD&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
+    try:
         r = requests.get(url)
         data = r.json()
         daily_data = data['Time Series FX (Daily)']
@@ -738,6 +740,7 @@ scheduler.add_job(job13, 'interval', minutes=1)
 scheduler.add_job(job14, 'interval', minutes=1)
 scheduler.add_job(job15, 'interval', minutes=1)
 scheduler.add_job(job16, 'interval', minutes=1)
+scheduler.add_job(job17, 'interval', minutes=1)
 scheduler.add_job(job18, 'interval', minutes=1)
 scheduler.add_job(job19, 'interval', minutes=1)
 scheduler.add_job(job20, 'interval', minutes=1)
