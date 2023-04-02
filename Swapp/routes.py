@@ -606,7 +606,7 @@ def secondhalf(results):
         results['GHStoZARRate'] = result
     except KeyError:
         results['GHStoZARRate'] = 0
-
+    time.sleep(30)
     third_run(results)
 
 
@@ -696,7 +696,7 @@ def job():
     except KeyError:
         results['GHStoCADRate'] = 0
 
-
+    time.sleep(15)
     secondhalf(results)
 
     print("Job ran at:")
