@@ -126,5 +126,4 @@ wrapt==1.12.1
 wsproto==1.2.0
 WTForms==3.0.0
 XlsxWriter==3.0.3
-yarl==1.6.3
 zipp==3.11.0
