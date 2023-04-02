@@ -579,36 +579,35 @@ def secondhalf(results):
 
 def job():
     results ={}
-    ts = td.exchange_rate(
-        symbol="GHS/USD"
-    )
 
-    result = ts.as_json()
-    results['GHStoUSDRate'] = result['rate']
+    try:
+        ts = td.exchange_rate(symbol="GHS/USD")
+        result = ts.as_json()
+        results['GHStoUSDRate'] = result['rate']
+    except requests.exceptions.HTTPError as e:
+        results['GHStoUSDRate'] = 0
 
-    # Construct the necessary time series
-    ts = td.exchange_rate(
-        symbol="USD/GHS"
-    )
-    result = ts.as_json()
-    results['USDtoGHSRate'] = result['rate']
-    time.sleep(60)
+    try:
+        ts = td.exchange_rate(symbol="USD/GHS")
+        result = ts.as_json()
+        results['USDtoGHSRate'] = result['rate']
+    except requests.exceptions.HTTPError as e:
+        results['USDtoGHSRate'] = 0
 
-    # Construct the necessary time series
-    ts = td.exchange_rate(
-        symbol="GBP/USD"
-    )
-    result = ts.as_json()
-    results['GBPtoUSDRate'] = result['rate']
+    try:
+        ts = td.exchange_rate(symbol="GBP/USD")
+        result = ts.as_json()
+        results['GBPtoUSDRate'] = result['rate']
+    except requests.exceptions.HTTPError as e:
+        results['GBPtoUSDRate'] = 0
 
-    # Construct the necessary time series
+    try:
+        ts = td.exchange_rate(symbol="USD/GBP")
+        result = ts.as_json()
+        results['USDtoGBPRate'] = result['rate']
+    except requests.exceptions.HTTPError as e:
+        results['USDtoGBPRate'] = 0
 
-    ts = td.exchange_rate(
-            symbol="USD/GBP"
-        )
-
-    result = ts.as_json()
-    results['USDtoGBPRate'] = result['rate']
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=EUR&apikey=8XWI3M5GUBYUJ295'
