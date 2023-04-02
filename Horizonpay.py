@@ -12,4 +12,4 @@ admin.add_view(ModelView(UserEvents, db.session))
 admin.add_view(ModelView(ActiveBid, db.session))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
