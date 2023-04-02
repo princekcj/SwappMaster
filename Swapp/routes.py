@@ -606,7 +606,6 @@ def secondhalf(results):
         results['GHStoZARRate'] = result
     except KeyError:
         results['GHStoZARRate'] = 0
-    time.sleep(15)
     third_run(results)
 
 
