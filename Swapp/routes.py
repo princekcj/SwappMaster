@@ -696,8 +696,6 @@ def job():
         results['GHStoCADRate'] = 0
 
     time.sleep(15)
-    secondhalf(results)
-
     print("Job ran at:")
     if cache:
         cache[0] = results
