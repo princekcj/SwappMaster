@@ -140,319 +140,350 @@ cache = []
 def third_run(results):
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['EURbaseGHSchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['EURbaseGHSchange'] = most_recent_percent_change
+    except:
+        results['EURbaseGHSchange'] = 0
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=EUR&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['GHSbaseEURchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['GHSbaseEURchange'] = most_recent_percent_change
+    except:
+        results['GHSbaseEURchange'] = 0
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=CAD&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date#
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['GHSbaseCADchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date#
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['GHSbaseCADchange'] = most_recent_percent_change
 
-    # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-    url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CAD&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+        # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+        url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CAD&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['CADbaseGHSchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['CADbaseGHSchange'] = most_recent_percent_change
+    except:
+        results['CADbaseGHSchange'] = 0
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=JPY&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['JPYbaseGHSchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['JPYbaseGHSchange'] = most_recent_percent_change
+    except:
+        results['JPYbaseGHSchange'] = 0
 
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=JPY&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['GHSbaseJPYchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['GHSbaseJPYchange'] = most_recent_percent_change
+    except:
+        results['GHSbaseJPYchange'] = 0
 
 
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=ZAR&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['GHSbaseZARchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['GHSbaseZARchange'] = most_recent_percent_change
+    except:
+        results['GHSbaseZARchange'] = 0
 
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CHF&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
 
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['CHFbaseGHSchange'] = most_recent_percent_change
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['CHFbaseGHSchange'] = most_recent_percent_change
+    except:
+        results['CHFbaseGHSchange'] = 0
 
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=NGN&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['GHSbaseNGNchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['GHSbaseNGNchange'] = most_recent_percent_change
+    except:
+        results['GHSbaseNGNchange'] = 0
 
-    ts = td.price(
-        symbol="GHS/USD"
-    )
-    result = ts.as_json()
-    result = "{:.4f}".format(float(result['price']))
-    results['GHSbaseUSDprice'] = result
+    try:
+        ts = td.price(
+            symbol="GHS/USD"
+        )
+        result = ts.as_json()
+        result = "{:.4f}".format(float(result['price']))
+        results['GHSbaseUSDprice'] = result
+    except:
+        results['GHSbaseUSDprice'] = 0
 
-    exchange_rate = td.quote(symbol='GHS/USD', interval="1day", timezone="Europe/London")
-    exchange_rate = exchange_rate.as_json()
-    price_change = float(exchange_rate['percent_change'])
-    result = "{:.4f}".format(price_change)
-    results['GHSbaseUSDchange'] = result
+    try:
+        exchange_rate = td.quote(symbol='GHS/USD', interval="1day", timezone="Europe/London")
+        exchange_rate = exchange_rate.as_json()
+        price_change = float(exchange_rate['percent_change'])
+        result = "{:.4f}".format(price_change)
+        results['GHSbaseUSDchange'] = result
+    except:
+        results['GHSbaseUSDchange'] = 0
+
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=GBP&apikey=8XWI3M5GUBYUJ295'
@@ -467,36 +498,39 @@ def third_run(results):
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=GBP&apikey=8XWI3M5GUBYUJ295'
-    r = requests.get(url)
-    data = r.json()
-    daily_data = data['Time Series FX (Daily)']
-    # Initialize the prev_date and most_recent_percent_change variables to None
-    prev_date = None
-    most_recent_percent_change = None
+    try:
+        r = requests.get(url)
+        data = r.json()
+        daily_data = data['Time Series FX (Daily)']
+        # Initialize the prev_date and most_recent_percent_change variables to None
+        prev_date = None
+        most_recent_percent_change = None
 
-    # You can loop through the daily data to calculate the percent change for each day
-    for date, info in daily_data.items():
-        # The closing price for the current day is stored in the '4. close' key
-        close = float(info['4. close'])
+        # You can loop through the daily data to calculate the percent change for each day
+        for date, info in daily_data.items():
+            # The closing price for the current day is stored in the '4. close' key
+            close = float(info['4. close'])
 
-        # If prev_date is not None, calculate the percent change
-        if prev_date is not None:
-            # The closing price for the previous day is stored in the '4. close' key of the previous day's data
-            prev_close = float(daily_data[prev_date]['4. close'])
+            # If prev_date is not None, calculate the percent change
+            if prev_date is not None:
+                # The closing price for the previous day is stored in the '4. close' key of the previous day's data
+                prev_close = float(daily_data[prev_date]['4. close'])
 
-            # Calculate the percent change
-            percent_change = (close - prev_close) / prev_close
+                # Calculate the percent change
+                percent_change = (close - prev_close) / prev_close
 
-            # Update the value of most_recent_percent_change with the current percent change
-            most_recent_percent_change = percent_change
+                # Update the value of most_recent_percent_change with the current percent change
+                most_recent_percent_change = percent_change
 
-        # Update the value of prev_date to the current date
-        prev_date = date
-    if most_recent_percent_change == None:
-        most_recent_percent_change = 0
-    most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
-    # Print the most recent percent change
-    results['GHSbaseGBPchange'] = most_recent_percent_change
+            # Update the value of prev_date to the current date
+            prev_date = date
+        if most_recent_percent_change == None:
+            most_recent_percent_change = 0
+        most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
+        # Print the most recent percent change
+        results['GHSbaseGBPchange'] = most_recent_percent_change
+    except:
+        results['GHSbaseGBPchange'] = 0
 
 
 def secondhalf(results):
