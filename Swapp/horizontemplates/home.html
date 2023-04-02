@@ -4,7 +4,7 @@
 	<a class="statement" style="color:white;">Send money</a>
 	<a class="statement" style="color:orange;margin-top:3%;">Your Way</a>
 <a style="color: white;" class="substatement">Set your own rates. and safely transfer money with others in over 10 different currencies worldwide.</a>
-        <button style="margin-left: 77%; margin-top: 1%;" onclick="location.href='http://127.0.0.1:5000/login'" class="logincard"><a class="logintitle" >LOG IN</a></button>
+        <button style="margin-left: 77%; margin-top: 1%;" onclick="location.href='{{ url_for('login') }}'" class="logincard"><a class="logintitle" >LOG IN</a></button>
 <img src="{{ url_for('static', filename='teamwork.png') }}" class="teamworkimg">
 </div>
 <div class="homepagecurrency">
@@ -91,6 +91,14 @@ top: 15%;
 width:20px;
 height:20px;
 }
+
+@media (max-width: 1300px ) and (min-width: 1100px ) {
+.teamworkimg{
+    right: 11%;
+
+}
+}
+
 @media (max-width: 1100px ) {
 .flags{
 width:15px;
