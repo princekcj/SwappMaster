@@ -78,7 +78,6 @@ psutil==5.8.0
 py==1.10.0
 py-solc-ast==1.2.9
 py-solc-x==1.1.0
-pycoingecko==2.2.0
 pycountry==22.3.5
 pycparser==2.21
 pycryptodome==3.10.1
