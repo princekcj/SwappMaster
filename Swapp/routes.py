@@ -713,7 +713,6 @@ def job7():
     except KeyError:
         results['GHStoCADRate'] = 0
 
-    time.sleep(15)
     print("Job ran at:")
     if cache:
         cache[0] = results
