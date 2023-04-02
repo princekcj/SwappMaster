@@ -303,7 +303,6 @@ def third_run(results):
     # Print the most recent percent change
     results['JPYbaseGHSchange'] = most_recent_percent_change
 
-    time.sleep(60)
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=JPY&apikey=8XWI3M5GUBYUJ295'
@@ -374,7 +373,6 @@ def third_run(results):
     # Print the most recent percent change
     results['GHSbaseZARchange'] = most_recent_percent_change
 
-    time.sleep(60)
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CHF&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
@@ -410,7 +408,6 @@ def third_run(results):
     # Print the most recent percent change
     results['CHFbaseGHSchange'] = most_recent_percent_change
 
-    time.sleep(60)
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=NGN&apikey=8XWI3M5GUBYUJ295'
@@ -584,7 +581,6 @@ def secondhalf(results):
 
 
 def job():
-    time.sleep(60)
     results ={}
     ts = td.exchange_rate(
         symbol="GHS/USD"
@@ -668,7 +664,6 @@ def job():
     except KeyError:
         results['GHStoCADRate'] = 0
 
-    time.sleep(60)  # Pause for 2 minutes
 
     secondhalf(results)
 
