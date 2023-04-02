@@ -706,12 +706,12 @@ def job():
 job()
 # Start the scheduler in the background
 scheduler = BackgroundScheduler()
-scheduler.add_job(job, 'interval', hours=1)
+scheduler.add_job(job, 'interval', minutes=5)
 # Add the second job to run 5 minutes after the first job
 scheduler.add_job(secondhalf, 'interval', minutes=5)
 
 # Add the third job to run 5 minutes after the second job
-scheduler.add_job(third_run, 'interval', minutes=10)
+scheduler.add_job(third_run, 'interval', minutes=5)
 scheduler.start()
 
 
