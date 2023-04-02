@@ -138,7 +138,7 @@ def bid_email_update(bid_occ):
 cache = []
 results ={}
 
-def third_run():
+def job14():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -175,6 +175,7 @@ def third_run():
     except:
         results['EURbaseGHSchange'] = 0
 
+def job15():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=EUR&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -210,7 +211,7 @@ def third_run():
         results['GHSbaseEURchange'] = most_recent_percent_change
     except:
         results['GHSbaseEURchange'] = 0
-
+def job16():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=CAD&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -244,7 +245,7 @@ def third_run():
         most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
         # Print the most recent percent change
         results['GHSbaseCADchange'] = most_recent_percent_change
-
+def job17():
         # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
         url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CAD&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
         r = requests.get(url)
@@ -279,7 +280,7 @@ def third_run():
         results['CADbaseGHSchange'] = most_recent_percent_change
     except:
         results['CADbaseGHSchange'] = 0
-
+def job18():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=JPY&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -316,7 +317,7 @@ def third_run():
     except:
         results['JPYbaseGHSchange'] = 0
 
-
+def job19():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=JPY&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -354,7 +355,7 @@ def third_run():
         results['GHSbaseJPYchange'] = 0
 
 
-
+def job20():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=ZAR&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -391,7 +392,7 @@ def third_run():
     except:
         results['GHSbaseZARchange'] = 0
 
-
+def job21():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CHF&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -429,7 +430,7 @@ def third_run():
     except:
         results['CHFbaseGHSchange'] = 0
 
-
+def job22():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=NGN&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -465,7 +466,7 @@ def third_run():
         results['GHSbaseNGNchange'] = most_recent_percent_change
     except:
         results['GHSbaseNGNchange'] = 0
-
+def job23():
     try:
         ts = td.price(
             symbol="GHS/USD"
@@ -476,6 +477,7 @@ def third_run():
     except:
         results['GHSbaseUSDprice'] = 0
 
+def job24():
     try:
         exchange_rate = td.quote(symbol='GHS/USD', interval="1day", timezone="Europe/London")
         exchange_rate = exchange_rate.as_json()
@@ -485,7 +487,7 @@ def third_run():
     except:
         results['GHSbaseUSDchange'] = 0
 
-
+def job25():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=GBP&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
@@ -496,7 +498,7 @@ def third_run():
         results['GHSbaseGBPprice'] = result
     except KeyError:
         results['GHSbaseGBPprice'] = 0
-
+def job26():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=GBP&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -534,7 +536,7 @@ def third_run():
         results['GHSbaseGBPchange'] = 0
 
 
-def secondhalf():
+def job8():
 
 
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=JPY&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
@@ -547,6 +549,7 @@ def secondhalf():
     except KeyError:
         results['JPYtoGHSRate'] = 0
 
+def job9():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=JPY&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
     try:
@@ -557,6 +560,7 @@ def secondhalf():
     except KeyError:
         results['GHStoJPYRate'] = 0
 
+def job10():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=CHF&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
     try:
@@ -567,6 +571,7 @@ def secondhalf():
     except KeyError:
         results['CHFtoGHSRate'] = 0
 
+def job11():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=ZAR&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
     try:
@@ -587,7 +592,7 @@ def secondhalf():
     except KeyError:
         results['CADtoGHSRate'] = 0
 
-
+def job12():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=NGN&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
     try:
@@ -598,6 +603,7 @@ def secondhalf():
     except KeyError:
         results['GHStoNGNRate'] = 0
 
+def job13():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=ZAR&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
     try:
@@ -607,7 +613,6 @@ def secondhalf():
         results['GHStoZARRate'] = result
     except KeyError:
         results['GHStoZARRate'] = 0
-    third_run(results)
 
 
 
@@ -620,6 +625,8 @@ def job():
     except:
         results['GHStoUSDRate'] = 0
 
+def job1():
+
     try:
         ts = td.exchange_rate(symbol="USD/GHS")
         result = ts.as_json()
@@ -627,6 +634,7 @@ def job():
     except:
         results['USDtoGHSRate'] = 0
 
+def job2():
     try:
         ts = td.exchange_rate(symbol="GBP/USD")
         result = ts.as_json()
@@ -634,6 +642,7 @@ def job():
     except:
         results['GBPtoUSDRate'] = 0
 
+def job3():
     try:
         ts = td.exchange_rate(symbol="USD/GBP")
         result = ts.as_json()
@@ -641,7 +650,7 @@ def job():
     except:
         results['USDtoGBPRate'] = 0
 
-
+def job4():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=EUR&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
@@ -653,6 +662,7 @@ def job():
     except KeyError:
         results['GHStoEURRate'] = 0
 
+def job44():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=EUR&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
@@ -664,6 +674,7 @@ def job():
     except KeyError:
         results['EURtoGHSRate'] = 0
 
+def job5():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=GBP&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
@@ -675,6 +686,7 @@ def job():
     except KeyError:
         results['GHStoGBPRate'] = 0
 
+def job6():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GBP&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
     try:
@@ -685,6 +697,7 @@ def job():
     except KeyError:
         results['GBPtoGHSRate'] = 0
 
+def job7():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=CAD&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
     data = r.json()
@@ -706,12 +719,38 @@ def job():
 job()
 # Start the scheduler in the background
 scheduler = BackgroundScheduler()
-scheduler.add_job(job, 'interval', minutes=5)
+scheduler.add_job(job, 'interval', minutes=1)
 # Add the second job to run 5 minutes after the first job
-scheduler.add_job(secondhalf, 'interval', minutes=5)
+scheduler.add_job(job1, 'interval', minutes=1)
+scheduler.add_job(job2, 'interval', minutes=1)
+scheduler.add_job(job3, 'interval', minutes=1)
+scheduler.add_job(job4, 'interval', minutes=1)
+scheduler.add_job(job44, 'interval', minutes=1)
+scheduler.add_job(job5, 'interval', minutes=1)
+scheduler.add_job(job6, 'interval', minutes=1)
+scheduler.add_job(job7, 'interval', minutes=1)
+scheduler.add_job(job8, 'interval', minutes=1)
+scheduler.add_job(job9, 'interval', minutes=1)
+scheduler.add_job(job10, 'interval', minutes=1)
+scheduler.add_job(job11, 'interval', minutes=1)
+scheduler.add_job(job12, 'interval', minutes=1)
+scheduler.add_job(job13, 'interval', minutes=1)
+scheduler.add_job(job14, 'interval', minutes=1)
+scheduler.add_job(job15, 'interval', minutes=1)
+scheduler.add_job(job16, 'interval', minutes=1)
+scheduler.add_job(job18, 'interval', minutes=1)
+scheduler.add_job(job19, 'interval', minutes=1)
+scheduler.add_job(job20, 'interval', minutes=1)
+scheduler.add_job(job21, 'interval', minutes=1)
+scheduler.add_job(job22, 'interval', minutes=1)
+scheduler.add_job(job23, 'interval', minutes=1)
+scheduler.add_job(job24, 'interval', minutes=1)
+scheduler.add_job(job25, 'interval', minutes=1)
+scheduler.add_job(job26, 'interval', minutes=1)
+
+
 
 # Add the third job to run 5 minutes after the second job
-scheduler.add_job(third_run, 'interval', minutes=5)
 scheduler.start()
 
 
