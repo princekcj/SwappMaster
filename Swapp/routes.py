@@ -584,28 +584,28 @@ def job():
         ts = td.exchange_rate(symbol="GHS/USD")
         result = ts.as_json()
         results['GHStoUSDRate'] = result['rate']
-    except requests.exceptions.HTTPError as e:
+    except:
         results['GHStoUSDRate'] = 0
 
     try:
         ts = td.exchange_rate(symbol="USD/GHS")
         result = ts.as_json()
         results['USDtoGHSRate'] = result['rate']
-    except requests.exceptions.HTTPError as e:
+    except:
         results['USDtoGHSRate'] = 0
 
     try:
         ts = td.exchange_rate(symbol="GBP/USD")
         result = ts.as_json()
         results['GBPtoUSDRate'] = result['rate']
-    except requests.exceptions.HTTPError as e:
+    except:
         results['GBPtoUSDRate'] = 0
 
     try:
         ts = td.exchange_rate(symbol="USD/GBP")
         result = ts.as_json()
         results['USDtoGBPRate'] = result['rate']
-    except requests.exceptions.HTTPError as e:
+    except:
         results['USDtoGBPRate'] = 0
 
 
