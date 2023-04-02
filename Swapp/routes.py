@@ -337,7 +337,6 @@ def third_run(results):
     # Print the most recent percent change
     results['GHSbaseJPYchange'] = most_recent_percent_change
 
-    time.sleep(60)
 
 
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -574,7 +573,6 @@ def secondhalf(results):
     except KeyError:
         results['GHStoZARRate'] = 0
 
-    time.sleep(60)
     third_run(results)
 
 
