@@ -594,7 +594,7 @@ def job():
     )
     result = ts.as_json()
     results['USDtoGHSRate'] = result['rate']
-    time.sleep(60)
+    time.sleep(30)
 
     # Construct the necessary time series
     ts = td.exchange_rate(
@@ -604,6 +604,7 @@ def job():
     results['GBPtoUSDRate'] = result['rate']
 
     # Construct the necessary time series
+
     ts = td.exchange_rate(
             symbol="USD/GBP"
         )
