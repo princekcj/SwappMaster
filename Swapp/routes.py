@@ -245,6 +245,8 @@ def job16():
         most_recent_percent_change = "{:.4f}".format(most_recent_percent_change)
         # Print the most recent percent change
         results['GHSbaseCADchange'] = most_recent_percent_change
+    except:
+        results['GHSbaseCADchange'] = 0
 def job17():
 
         # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -282,6 +284,7 @@ def job17():
         results['CADbaseGHSchange'] = most_recent_percent_change
     except:
         results['CADbaseGHSchange'] = 0
+
 def job18():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=JPY&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
