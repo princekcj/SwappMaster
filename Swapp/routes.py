@@ -138,7 +138,7 @@ def bid_email_update(bid_occ):
 cache = []
 results ={}
 
-def third_run(results):
+def third_run():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
     try:
@@ -534,7 +534,7 @@ def third_run(results):
         results['GHSbaseGBPchange'] = 0
 
 
-def secondhalf(results):
+def secondhalf():
 
 
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=JPY&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
