@@ -1,1 +1,1 @@
-web: gunicorn Horizonpay:app --timeout 1600
+web: gunicorn Horizonpay:app
