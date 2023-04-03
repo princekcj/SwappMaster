@@ -721,19 +721,19 @@ def job7():
 
 
 job()
-time.sleep(60)
+
 job1()
 time.sleep(60)
 job2()
 time.sleep(60)
 job3()
-time.sleep(60)
+
 job4()
 time.sleep(60)
 job5()
 time.sleep(60)
 job6()
-time.sleep(60)
+
 job7()
 time.sleep(60)
 job8()
