@@ -173,7 +173,8 @@ def job14():
         # Print the most recent percent change
         results['EURbaseGHSchange'] = most_recent_percent_change
     except:
-        results['EURbaseGHSchange'] = 0
+        if 'EURbaseGHSchange' not in results:
+            results['EURbaseGHSchange'] = 0
 
 def job15():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -210,7 +211,8 @@ def job15():
         # Print the most recent percent change
         results['GHSbaseEURchange'] = most_recent_percent_change
     except:
-        results['GHSbaseEURchange'] = 0
+        if 'GHSbaseEURchange' not in results:
+            results['GHSbaseEURchange'] = 0
 def job16():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=CAD&apikey=8XWI3M5GUBYUJ295'
@@ -246,7 +248,8 @@ def job16():
         # Print the most recent percent change
         results['GHSbaseCADchange'] = most_recent_percent_change
     except:
-        results['GHSbaseCADchange'] = 0
+        if 'GHSbaseCADchange' not in results:
+            results['GHSbaseCADchange'] = 0
 def job17():
 
         # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -283,7 +286,8 @@ def job17():
         # Print the most recent percent change
         results['CADbaseGHSchange'] = most_recent_percent_change
     except:
-        results['CADbaseGHSchange'] = 0
+        if 'CADbaseGHSchange' not in results:
+            results['CADbaseGHSchange'] = 0
 
 def job18():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -320,7 +324,8 @@ def job18():
         # Print the most recent percent change
         results['JPYbaseGHSchange'] = most_recent_percent_change
     except:
-        results['JPYbaseGHSchange'] = 0
+        if 'JPYbaseGHSchange' not in results:
+            results['JPYbaseGHSchange'] = 0
 
 def job19():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -357,7 +362,8 @@ def job19():
         # Print the most recent percent change
         results['GHSbaseJPYchange'] = most_recent_percent_change
     except:
-        results['GHSbaseJPYchange'] = 0
+        if 'GHSbaseJPYchange' not in results:
+            results['GHSbaseJPYchange'] = 0
 
 
 def job20():
@@ -395,10 +401,11 @@ def job20():
         # Print the most recent percent change
         results['GHSbaseZARchange'] = most_recent_percent_change
     except:
-        results['GHSbaseZARchange'] = 0
+        if 'GHSbaseZARchange' not in results:
+            results['GHSbaseZARchange'] = 0
 
 def job21():
-    # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+    # replace the "demo" api key below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=CHF&to_symbol=GHS&apikey=8XWI3M5GUBYUJ295'
     try:
         r = requests.get(url)
@@ -433,7 +440,8 @@ def job21():
         # Print the most recent percent change
         results['CHFbaseGHSchange'] = most_recent_percent_change
     except:
-        results['CHFbaseGHSchange'] = 0
+        if 'CHFbaseGHSchange' not in results:
+            results['CHFbaseGHSchange'] = 0
 
 def job22():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -470,7 +478,8 @@ def job22():
         # Print the most recent percent change
         results['GHSbaseNGNchange'] = most_recent_percent_change
     except:
-        results['GHSbaseNGNchange'] = 0
+        if 'GHSbaseNGNchange' not in results:
+            results['GHSbaseNGNchange'] = 0
 def job23():
     try:
         ts = td.price(
@@ -480,7 +489,8 @@ def job23():
         result = "{:.4f}".format(float(result['price']))
         results['GHSbaseUSDprice'] = result
     except:
-        results['GHSbaseUSDprice'] = 0
+        if 'GHSbaseUSDprice' not in results:
+            results['GHSbaseUSDprice'] = 0
 
 def job24():
     try:
@@ -490,7 +500,8 @@ def job24():
         result = "{:.4f}".format(price_change)
         results['GHSbaseUSDchange'] = result
     except:
-        results['GHSbaseUSDchange'] = 0
+        if 'GHSbaseUSDchange' not in results:
+            results['GHSbaseUSDchange'] = 0
 
 def job25():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -502,7 +513,10 @@ def job25():
         result = "{:.4f}".format(float(result))
         results['GHSbaseGBPprice'] = result
     except KeyError:
-        results['GHSbaseGBPprice'] = 0
+        if 'GHSbaseGBPprice' not in results:
+            results['GHSbaseGBPprice'] = 0
+
+
 def job26():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
     url = 'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=GHS&to_symbol=GBP&apikey=8XWI3M5GUBYUJ295'
@@ -538,7 +552,8 @@ def job26():
         # Print the most recent percent change
         results['GHSbaseGBPchange'] = most_recent_percent_change
     except:
-        results['GHSbaseGBPchange'] = 0
+        if 'GHSbaseGBPchange' not in results:
+            results['GHSbaseGBPchange'] = 0
 
 
 def job8():
@@ -552,7 +567,8 @@ def job8():
         result = "{:.4f}".format(float(result))
         results['JPYtoGHSRate'] = result
     except KeyError:
-        results['JPYtoGHSRate'] = 0
+        if 'JPYtoGHSRate' not in results:
+            results['JPYtoGHSRate'] = 0
 
 def job9():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=JPY&apikey=8XWI3M5GUBYUJ295'
@@ -563,7 +579,8 @@ def job9():
         result = "{:.4f}".format(float(result))
         results['GHStoJPYRate'] = result
     except KeyError:
-        results['GHStoJPYRate'] = 0
+        if 'CHFtoGHSRate' not in results:
+            results['CHFtoGHSRate'] = 0
 
 def job10():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=CHF&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
@@ -574,7 +591,8 @@ def job10():
         result = "{:.4f}".format(float(result))
         results['CHFtoGHSRate'] = result
     except KeyError:
-        results['CHFtoGHSRate'] = 0
+        if 'CHFtoGHSRate' not in results:
+            results['CHFtoGHSRate'] = 0
 
 def job11():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=ZAR&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
@@ -585,7 +603,8 @@ def job11():
         result = "{:.4f}".format(float(result))
         results['ZARtoGHSRate'] = result
     except KeyError:
-        results['ZARtoGHSRate'] = 0
+        if 'CADtoGHSRate' not in results:
+            results['CADtoGHSRate'] = 0
 
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=CAD&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
@@ -595,7 +614,8 @@ def job11():
         result = "{:.4f}".format(float(result))
         results['CADtoGHSRate'] = result
     except KeyError:
-        results['CADtoGHSRate'] = 0
+        if 'CADtoGHSRate' not in results:
+            results['CADtoGHSRate'] = 0
 
 def job12():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=NGN&apikey=8XWI3M5GUBYUJ295'
@@ -606,7 +626,8 @@ def job12():
         result = "{:.4f}".format(float(result))
         results['GHStoNGNRate'] = result
     except KeyError:
-        results['GHStoNGNRate'] = 0
+        if 'GHStoNGNRate' not in results:
+            results['GHStoNGNRate'] = 0
 
 def job13():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=ZAR&apikey=8XWI3M5GUBYUJ295'
@@ -617,7 +638,8 @@ def job13():
         result = "{:.4f}".format(float(result))
         results['GHStoZARRate'] = result
     except KeyError:
-        results['GHStoZARRate'] = 0
+        if 'GHStoZARRate' not in results:
+            results['GHStoZARRate'] = 0
 
 
 
@@ -628,7 +650,8 @@ def job():
         result = ts.as_json()
         results['GHStoUSDRate'] = result['rate']
     except:
-        results['GHStoUSDRate'] = 0
+        if 'GHStoUSDRate' not in results:
+            results['GHStoUSDRate'] = 0
 
 def job1():
 
@@ -637,7 +660,8 @@ def job1():
         result = ts.as_json()
         results['USDtoGHSRate'] = result['rate']
     except:
-        results['USDtoGHSRate'] = 0
+        if 'USDtoGHSRate' not in results:
+            results['USDtoGHSRate'] = 0
 
 def job2():
     try:
@@ -645,7 +669,8 @@ def job2():
         result = ts.as_json()
         results['GBPtoUSDRate'] = result['rate']
     except:
-        results['GBPtoUSDRate'] = 0
+        if 'GBPtoUSDRate' not in results:
+            results['GBPtoUSDRate'] = 0
 
 def job3():
     try:
@@ -653,7 +678,8 @@ def job3():
         result = ts.as_json()
         results['USDtoGBPRate'] = result['rate']
     except:
-        results['USDtoGBPRate'] = 0
+        if 'USDtoGBPRate' not in results:
+            results['USDtoGBPRate'] = 0
 
 def job4():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -665,7 +691,8 @@ def job4():
         result = "{:.4f}".format(float(result))
         results['GHStoEURRate'] = result
     except KeyError:
-        results['GHStoEURRate'] = 0
+        if 'GHStoEURRate' not in results:
+            results['GHStoEURRate'] = 0
 
 def job44():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -677,7 +704,8 @@ def job44():
         result = "{:.4f}".format(float(result))
         results['EURtoGHSRate'] = result
     except KeyError:
-        results['EURtoGHSRate'] = 0
+        if 'EURtoGHSRate' not in results:
+            results['EURtoGHSRate'] = 0
 
 def job5():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -689,7 +717,8 @@ def job5():
         result = "{:.4f}".format(float(result))
         results['GHStoGBPRate'] = result
     except KeyError:
-        results['GHStoGBPRate'] = 0
+        if 'GHStoGBPRate' not in results:
+            results['GHStoGBPRate'] = 0
 
 def job6():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GBP&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
@@ -700,7 +729,8 @@ def job6():
         result = "{:.4f}".format(float(result))
         results['GBPtoGHSRate'] = result
     except KeyError:
-        results['GBPtoGHSRate'] = 0
+        if 'GBPtoGHSRate' not in results:
+            results['GBPtoGHSRate'] = 0
 
 def job7():
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=GHS&to_currency=CAD&apikey=8XWI3M5GUBYUJ295'
