@@ -742,7 +742,7 @@ def job7():
         results['GHStoCADRate'] = result
     except KeyError:
         results['GHStoCADRate'] = 0
-
+def cache():
     print("Job ran at:")
     if cache:
         cache[0] = results
@@ -784,6 +784,8 @@ job24()
 job25()
 time.sleep(5)
 job26()
+cache()
+
 
 
 # Start the scheduler in the background
@@ -818,7 +820,7 @@ scheduler.add_job(job23, 'interval', minutes=48)
 scheduler.add_job(job24, 'interval', minutes=50)
 scheduler.add_job(job25, 'interval', minutes=52)
 scheduler.add_job(job26, 'interval', minutes=54)
-
+scheduler.add_job(cache, 'interval', minutes=56)
 
 
 
