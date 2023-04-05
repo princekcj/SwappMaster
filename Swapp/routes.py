@@ -556,6 +556,7 @@ def job26():
             results['GHSbaseGBPchange'] = 0
 
 
+
 def job8():
 
 
@@ -820,7 +821,7 @@ scheduler.add_job(job23, 'interval', minutes=48)
 scheduler.add_job(job24, 'interval', minutes=50)
 scheduler.add_job(job25, 'interval', minutes=52)
 scheduler.add_job(job26, 'interval', minutes=54)
-scheduler.add_job(cachejob(cache), 'interval', minutes=56)
+scheduler.add_job(cachejob, 'interval', minutes=56, args=[cache])
 
 
 
