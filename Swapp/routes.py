@@ -742,7 +742,7 @@ def job7():
         results['GHStoCADRate'] = result
     except KeyError:
         results['GHStoCADRate'] = 0
-def cache():
+def cachejob(cache):
     print("Job ran at:")
     if cache:
         cache[0] = results
@@ -784,7 +784,7 @@ job24()
 job25()
 time.sleep(5)
 job26()
-cache()
+cachejob()
 
 
 
