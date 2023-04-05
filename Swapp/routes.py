@@ -603,8 +603,8 @@ def job11():
         result = "{:.4f}".format(float(result))
         results['ZARtoGHSRate'] = result
     except KeyError:
-        if 'CADtoGHSRate' not in results:
-            results['CADtoGHSRate'] = 0
+        if 'ZARtoGHSRate' not in results:
+            results['ZARtoGHSRate'] = 0
 
     url = 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=CAD&to_currency=GHS&apikey=8XWI3M5GUBYUJ295'
     r = requests.get(url)
