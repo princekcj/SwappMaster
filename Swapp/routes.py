@@ -788,7 +788,6 @@ job26()
 cachejob(cache)
 
 
-
 # Start the scheduler in the background
 scheduler = BackgroundScheduler()
 scheduler.start()
@@ -987,8 +986,9 @@ def TrackExchange(bid_occurence):
         print('tracking ex')
         request = Transaction.query.filter_by(id=bid_occurence.request_id).first()
         print(request)
-        sent_to = request.RequestAcceptor_user_id
+        sent_to = bid_occurence.bidder_user_id
         _user_idOfEvents = current_user.id
+        print(sent_to)
         print(_user_idOfEvents)
         BaseCurrency = request.BaseCurrency
         NewCurrency = request.NewCurrency
@@ -999,7 +999,7 @@ def TrackExchange(bid_occurence):
         amount = bid_occurence.BidAmount
         attachment = 'Attach Payment Confirmation'
         proposed_rate = bid_occurence.BidRate
-        eventTo = UserEvents(_user_idOfEvents=_user_idOfEvents, with_id=sent_to , corresponding_event_id=corresponding_event_id , event_type=event_type, event_content=event_con1, status=status, amount=amount, attachment = attachment, proposed_rate=proposed_rate )
+        eventTo = UserEvents(with_id=sent_to, _user_idOfEvents=_user_idOfEvents,exchangebasecurrency=BaseCurrency, exchangenewcurrency=NewCurrency, corresponding_event_id=corresponding_event_id , event_type=event_type, event_content=event_con1, status=status, amount=amount, attachment = attachment, proposed_rate=proposed_rate )
         db.session.add(eventTo)
         db.session.commit()
         print(UserEvents.query.filter_by(event_type='Exchange').all())
@@ -1378,6 +1378,7 @@ def accept_bids():
                         return flash("Another Bid Has Been Accepted", "warning")
                     print('made it 2')
                     request_.date_accepted = datetime.now()
+                    request_.RequestAcceptor_user_id = bidtoturnoff.bidder_user_id
                     db.session.commit()
                     TrackExchange(bidtoturnoff)
                     print('winning again')
@@ -1393,7 +1394,7 @@ def accept_bids():
                         return flash("Another Bid Has Been Accepted", "warning")
                     print('made it 2')
                     request_.date_accepted = datetime.now()
-
+                    request_.RequestAcceptor_user_id = bidtoturnoff.bidder_user_id
                     db.session.commit()
 
                     TrackExchange(bidtoturnoff)
