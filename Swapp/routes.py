@@ -751,41 +751,6 @@ def cachejob(cache):
         cache.append(results)
 
 
-job()
-
-job1()
-job2()
-time.sleep(60)
-job3()
-
-job4()
-
-job5()
-job6()
-
-job7()
-job8()
-job9()
-job10()
-job11()
-time.sleep(5)
-job12()
-job13()
-job14()
-job15()
-job16()
-job17()
-job18()
-job19()
-job20()
-job21()
-job22()
-job23()
-job24()
-job25()
-time.sleep(5)
-job26()
-cachejob(cache)
 
 
 # Start the scheduler in the background
