@@ -728,7 +728,6 @@ def job7():
         results['GHStoCADRate'] = result
     except KeyError:
         results['GHStoCADRate'] = 0
-
 def cachejob(cache):
     print("Job ran at:")
     if cache:
@@ -966,7 +965,7 @@ def add_header(response):
 def home():
     GBPchange = GHSbaseprices.GHSbaseGBPchange()
     USDchange = GHSbaseprices.GHSbaseUSDchange()
-    USDprice = Rates.GHStoUSDRate()
+    USDprice = GHSbaseprices.GHSbaseUSDprice()
     GBPprice = GHSbaseprices.GHSbaseGBPprice()
     CADtoGHS = Rates.GHStoCADRate()
     JPYtoGHS = Rates.JPYtoGHSRate()
