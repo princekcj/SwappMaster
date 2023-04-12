@@ -643,44 +643,29 @@ def job13():
             results['GHStoZARRate'] = 0
 
 
+def get_exchange_rates(symbols):
+
+    try:
+        ts = td.exchange_rate(symbol=",".join(symbols))
+        exchange_rates = ts.as_json()["exchangeRate"]
+        print(exchange_rates)
+        for rate in exchange_rates:
+            from_currency = rate["fromCurrency"]
+            to_currency = rate["toCurrency"]
+            rate_value = rate["exchangeRate"]
+
+            results[f"{from_currency}to{to_currency}Rate"] = rate_value
+
+    except:
+        for symbol in symbols:
+            if f"{symbol}Rate" not in results:
+                results[f"{symbol}Rate"] = 0
+
+    return results
 
 def job():
-
-    try:
-        ts = td.exchange_rate(symbol="GHS/USD")
-        result = ts.as_json()
-        results['GHStoUSDRate'] = result['rate']
-    except:
-        if 'GHStoUSDRate' not in results:
-            results['GHStoUSDRate'] = 0
-
-def job1():
-
-    try:
-        ts = td.exchange_rate(symbol="USD/GHS")
-        result = ts.as_json()
-        results['USDtoGHSRate'] = result['rate']
-    except:
-        if 'USDtoGHSRate' not in results:
-            results['USDtoGHSRate'] = 0
-
-def job2():
-    try:
-        ts = td.exchange_rate(symbol="GBP/USD")
-        result = ts.as_json()
-        results['GBPtoUSDRate'] = result['rate']
-    except:
-        if 'GBPtoUSDRate' not in results:
-            results['GBPtoUSDRate'] = 0
-
-def job3():
-    try:
-        ts = td.exchange_rate(symbol="USD/GBP")
-        result = ts.as_json()
-        results['USDtoGBPRate'] = result['rate']
-    except:
-        if 'USDtoGBPRate' not in results:
-            results['USDtoGBPRate'] = 0
+    symbols = ["GHS/USD", "USD/GHS", "GBP/USD", "USD/GBP"]
+    exchange_rates = get_exchange_rates(symbols)
 
 def job4():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -743,6 +728,7 @@ def job7():
         results['GHStoCADRate'] = result
     except KeyError:
         results['GHStoCADRate'] = 0
+
 def cachejob(cache):
     print("Job ran at:")
     if cache:
@@ -752,40 +738,36 @@ def cachejob(cache):
 
 
 
-
 # Start the scheduler in the background
 scheduler = BackgroundScheduler()
 scheduler.start()
 scheduler.add_job(job, 'interval', minutes=1)
 # Add the second job to run 5 minutes after the first job
-scheduler.add_job(job1, 'interval', minutes=2)
-scheduler.add_job(job2, 'interval', minutes=4)
-scheduler.add_job(job3, 'interval', minutes=6)
-scheduler.add_job(job4, 'interval', minutes=8)
-scheduler.add_job(job44, 'interval', minutes=10)
-scheduler.add_job(job5, 'interval', minutes=12)
-scheduler.add_job(job6, 'interval', minutes=14)
-scheduler.add_job(job7, 'interval', minutes=16)
-scheduler.add_job(job8, 'interval', minutes=18)
-scheduler.add_job(job9, 'interval', minutes=20)
-scheduler.add_job(job10, 'interval', minutes=22)
-scheduler.add_job(job11, 'interval', minutes=24)
-scheduler.add_job(job12, 'interval', minutes=26)
-scheduler.add_job(job13, 'interval', minutes=28)
-scheduler.add_job(job14, 'interval', minutes=30)
-scheduler.add_job(job15, 'interval', minutes=32)
-scheduler.add_job(job16, 'interval', minutes=34)
-scheduler.add_job(job17, 'interval', minutes=36)
-scheduler.add_job(job18, 'interval', minutes=38)
-scheduler.add_job(job19, 'interval', minutes=40)
-scheduler.add_job(job20, 'interval', minutes=42)
-scheduler.add_job(job21, 'interval', minutes=44)
-scheduler.add_job(job22, 'interval', minutes=46)
-scheduler.add_job(job23, 'interval', minutes=48)
-scheduler.add_job(job24, 'interval', minutes=50)
-scheduler.add_job(job25, 'interval', minutes=52)
-scheduler.add_job(job26, 'interval', minutes=54)
-scheduler.add_job(cachejob, 'interval', minutes=56, args=[cache])
+scheduler.add_job(job4, 'interval', minutes=2)
+scheduler.add_job(job44, 'interval', minutes=3)
+scheduler.add_job(job5, 'interval', minutes=4)
+scheduler.add_job(job6, 'interval', minutes=5)
+scheduler.add_job(job7, 'interval', minutes=6)
+scheduler.add_job(job8, 'interval', minutes=7)
+scheduler.add_job(job9, 'interval', minutes=9)
+scheduler.add_job(job10, 'interval', minutes=11)
+scheduler.add_job(job11, 'interval', minutes=12)
+scheduler.add_job(job12, 'interval', minutes=13)
+scheduler.add_job(job13, 'interval', minutes=14)
+scheduler.add_job(job14, 'interval', minutes=15)
+scheduler.add_job(job15, 'interval', minutes=16)
+scheduler.add_job(job16, 'interval', minutes=17)
+scheduler.add_job(job17, 'interval', minutes=18)
+scheduler.add_job(job18, 'interval', minutes=19)
+scheduler.add_job(job19, 'interval', minutes=20)
+scheduler.add_job(job20, 'interval', minutes=21)
+scheduler.add_job(job21, 'interval', minutes=22)
+scheduler.add_job(job22, 'interval', minutes=23)
+scheduler.add_job(job23, 'interval', minutes=24)
+scheduler.add_job(job24, 'interval', minutes=25)
+scheduler.add_job(job25, 'interval', minutes=26)
+scheduler.add_job(job26, 'interval', minutes=27)
+scheduler.add_job(cachejob, 'interval', minutes=28, args=[cache])
 
 
 
@@ -984,7 +966,7 @@ def add_header(response):
 def home():
     GBPchange = GHSbaseprices.GHSbaseGBPchange()
     USDchange = GHSbaseprices.GHSbaseUSDchange()
-    USDprice = GHSbaseprices.GHSbaseUSDprice()
+    USDprice = Rates.GHStoUSDRate()
     GBPprice = GHSbaseprices.GHSbaseGBPprice()
     CADtoGHS = Rates.GHStoCADRate()
     JPYtoGHS = Rates.JPYtoGHSRate()
