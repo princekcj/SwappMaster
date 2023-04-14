@@ -644,22 +644,20 @@ def job13():
 
 
 def get_exchange_rates(symbols):
-
     try:
         ts = td.exchange_rate(symbol=symbols)
         exchange_rates = ts.as_json()["exchangeRate"]
         print(exchange_rates)
         for rate in exchange_rates:
-            from_currency = rate["fromCurrency"]
-            to_currency = rate["toCurrency"]
+            from_currency, to_currency = rate["fromCurrency"], rate["toCurrency"]
             rate_value = rate["exchangeRate"]
-
             results[f"{from_currency}to{to_currency}Rate"] = rate_value
-
     except:
         for symbol in symbols:
             if f"{symbol}Rate" not in results:
-                results[f"{symbol}Rate"] = 0
+                # Split the symbol at '/' and add the two currency symbols to the results dictionary
+                from_currency, to_currency = symbol.split('/')
+                results[f"{from_currency}to{to_currency}Rate"] = 0
     print(results)
     return results
 
