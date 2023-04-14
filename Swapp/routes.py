@@ -643,6 +643,8 @@ def job13():
             results['GHStoZARRate'] = 0
 
 
+
+
 def get_exchange_rates(symbols):
     try:
         ts = td.exchange_rate(symbol=symbols)
@@ -736,45 +738,53 @@ def cachejob(cache):
         cache.append(results)
 
 
+import sys, socket
 
-# Start the scheduler in the background
-scheduler = BackgroundScheduler()
-scheduler.start()
-start_time = datetime.utcnow() + timedelta(seconds=30)  # add 30 seconds delay to start time
+try:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind(("127.0.0.1", 47200))
+except socket.error:
+    print("!!!scheduler already started, DO NOTHING")
+else:
+    print("scheduler started")
+    # Start the scheduler in the background
+    scheduler = BackgroundScheduler()
+    scheduler.start()
+    start_time = datetime.utcnow() + timedelta(seconds=30)  # add 30 seconds delay to start time
 
-scheduler.add_job(job, 'interval', minutes=60, next_run_time=start_time)
-scheduler.add_job(job4, 'interval', minutes=61, next_run_time=start_time + timedelta(minutes=1))
-scheduler.add_job(job44, 'interval', minutes=62, next_run_time=start_time + timedelta(minutes=2))
-scheduler.add_job(job5, 'interval', minutes=63, next_run_time=start_time + timedelta(minutes=3))
-scheduler.add_job(job6, 'interval', minutes=64, next_run_time=start_time + timedelta(minutes=4))
-scheduler.add_job(job7, 'interval', minutes=65, next_run_time=start_time + timedelta(minutes=5))
-scheduler.add_job(job8, 'interval', minutes=66, next_run_time=start_time + timedelta(minutes=6))
-scheduler.add_job(job9, 'interval', minutes=67, next_run_time=start_time + timedelta(minutes=7))
-scheduler.add_job(job10, 'interval', minutes=68, next_run_time=start_time + timedelta(minutes=8))
-scheduler.add_job(job11, 'interval', minutes=69, next_run_time=start_time + timedelta(minutes=9))
-scheduler.add_job(job12, 'interval', minutes=70, next_run_time=start_time + timedelta(minutes=10))
-scheduler.add_job(job13, 'interval', minutes=71, next_run_time=start_time + timedelta(minutes=11))
-scheduler.add_job(job14, 'interval', minutes=72, next_run_time=start_time + timedelta(minutes=12))
-scheduler.add_job(job15, 'interval', minutes=73, next_run_time=start_time + timedelta(minutes=13))
-scheduler.add_job(job16, 'interval', minutes=74, next_run_time=start_time + timedelta(minutes=14))
-scheduler.add_job(job17, 'interval', minutes=75, next_run_time=start_time + timedelta(minutes=15))
-scheduler.add_job(job18, 'interval', minutes=76, next_run_time=start_time + timedelta(minutes=16))
-scheduler.add_job(job19, 'interval', minutes=77, next_run_time=start_time + timedelta(minutes=17))
-scheduler.add_job(job20, 'interval', minutes=78, next_run_time=start_time + timedelta(minutes=18))
-scheduler.add_job(job21, 'interval', minutes=79, next_run_time=start_time + timedelta(minutes=19))
-scheduler.add_job(job22, 'interval', minutes=80, next_run_time=start_time + timedelta(minutes=20))
-scheduler.add_job(job23, 'interval', minutes=81, next_run_time=start_time + timedelta(minutes=21))
-scheduler.add_job(job24, 'interval', minutes=82, next_run_time=start_time + timedelta(minutes=22))
-scheduler.add_job(job25, 'interval', minutes=83, next_run_time=start_time + timedelta(minutes=23))
-scheduler.add_job(job26, 'interval', minutes=84, next_run_time=start_time + timedelta(minutes=24))
-scheduler.add_job(cachejob, 'interval', minutes=85, next_run_time=start_time + timedelta(minutes=25), args=[cache])
+    scheduler.add_job(job, 'interval', minutes=60, next_run_time=start_time)
+    scheduler.add_job(job4, 'interval', minutes=61, next_run_time=start_time + timedelta(minutes=1))
+    scheduler.add_job(job44, 'interval', minutes=62, next_run_time=start_time + timedelta(minutes=2))
+    scheduler.add_job(job5, 'interval', minutes=63, next_run_time=start_time + timedelta(minutes=3))
+    scheduler.add_job(job6, 'interval', minutes=64, next_run_time=start_time + timedelta(minutes=4))
+    scheduler.add_job(job7, 'interval', minutes=65, next_run_time=start_time + timedelta(minutes=5))
+    scheduler.add_job(job8, 'interval', minutes=66, next_run_time=start_time + timedelta(minutes=6))
+    scheduler.add_job(job9, 'interval', minutes=67, next_run_time=start_time + timedelta(minutes=7))
+    scheduler.add_job(job10, 'interval', minutes=68, next_run_time=start_time + timedelta(minutes=8))
+    scheduler.add_job(job11, 'interval', minutes=69, next_run_time=start_time + timedelta(minutes=9))
+    scheduler.add_job(job12, 'interval', minutes=70, next_run_time=start_time + timedelta(minutes=10))
+    scheduler.add_job(job13, 'interval', minutes=71, next_run_time=start_time + timedelta(minutes=11))
+    scheduler.add_job(job14, 'interval', minutes=72, next_run_time=start_time + timedelta(minutes=12))
+    scheduler.add_job(job15, 'interval', minutes=73, next_run_time=start_time + timedelta(minutes=13))
+    scheduler.add_job(job16, 'interval', minutes=74, next_run_time=start_time + timedelta(minutes=14))
+    scheduler.add_job(job17, 'interval', minutes=75, next_run_time=start_time + timedelta(minutes=15))
+    scheduler.add_job(job18, 'interval', minutes=76, next_run_time=start_time + timedelta(minutes=16))
+    scheduler.add_job(job19, 'interval', minutes=77, next_run_time=start_time + timedelta(minutes=17))
+    scheduler.add_job(job20, 'interval', minutes=78, next_run_time=start_time + timedelta(minutes=18))
+    scheduler.add_job(job21, 'interval', minutes=79, next_run_time=start_time + timedelta(minutes=19))
+    scheduler.add_job(job22, 'interval', minutes=80, next_run_time=start_time + timedelta(minutes=20))
+    scheduler.add_job(job23, 'interval', minutes=81, next_run_time=start_time + timedelta(minutes=21))
+    scheduler.add_job(job24, 'interval', minutes=82, next_run_time=start_time + timedelta(minutes=22))
+    scheduler.add_job(job25, 'interval', minutes=83, next_run_time=start_time + timedelta(minutes=23))
+    scheduler.add_job(job26, 'interval', minutes=84, next_run_time=start_time + timedelta(minutes=24))
+    scheduler.add_job(cachejob, 'interval', minutes=85, next_run_time=start_time + timedelta(minutes=25), args=[cache])
 
 
-# Add the third job to run 5 minutes after the second job
+    # Add the third job to run 5 minutes after the second job
 
 
 
-# Stop the scheduler when the Flask application shuts down
+    # Stop the scheduler when the Flask application shuts down
 @atexit.register
 def shutdown():
     scheduler.shutdown()
@@ -965,7 +975,7 @@ def add_header(response):
 def home():
     GBPchange = GHSbaseprices.GHSbaseGBPchange()
     USDchange = GHSbaseprices.GHSbaseUSDchange()
-    USDprice = Rates.USDtoGHSRate()
+    USDprice = GHSbaseprices.GHSbaseUSDprice()
     GBPprice = GHSbaseprices.GHSbaseGBPprice()
     CADtoGHS = Rates.GHStoCADRate()
     JPYtoGHS = Rates.JPYtoGHSRate()
