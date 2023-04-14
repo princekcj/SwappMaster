@@ -646,7 +646,7 @@ def job13():
 def get_exchange_rates(symbols):
 
     try:
-        ts = td.exchange_rate(symbol=",".join(symbols))
+        ts = td.exchange_rate(symbol=symbols)
         exchange_rates = ts.as_json()["exchangeRate"]
         print(exchange_rates)
         for rate in exchange_rates:
