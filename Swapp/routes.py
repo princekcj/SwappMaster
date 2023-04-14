@@ -645,27 +645,43 @@ def job13():
 
 
 
-def get_exchange_rates(symbols):
-    try:
-        ts = td.exchange_rate(symbol=symbols)
-        exchange_rates = ts.as_json()["exchangeRate"]
-        print(exchange_rates)
-        for rate in exchange_rates:
-            from_currency, to_currency = rate["fromCurrency"], rate["toCurrency"]
-            rate_value = rate["exchangeRate"]
-            results[f"{from_currency}to{to_currency}Rate"] = rate_value
-    except:
-        for symbol in symbols:
-            if f"{symbol}Rate" not in results:
-                # Split the symbol at '/' and add the two currency symbols to the results dictionary
-                from_currency, to_currency = symbol.split('/')
-                results[f"{from_currency}to{to_currency}Rate"] = 0
-    print(results)
-    return results
-
 def job():
-    symbols = ["GHS/USD", "USD/GHS", "GBP/USD", "USD/GBP"]
-    exchange_rates = get_exchange_rates(symbols)
+
+    try:
+        ts = td.exchange_rate(symbol="GHS/USD")
+        result = ts.as_json()
+        results['GHStoUSDRate'] = result['rate']
+    except:
+        if 'GHStoUSDRate' not in results:
+            results['GHStoUSDRate'] = 0
+
+def job1():
+
+    try:
+        ts = td.exchange_rate(symbol="USD/GHS")
+        result = ts.as_json()
+        results['USDtoGHSRate'] = result['rate']
+    except:
+        if 'USDtoGHSRate' not in results:
+            results['USDtoGHSRate'] = 0
+
+def job2():
+    try:
+        ts = td.exchange_rate(symbol="GBP/USD")
+        result = ts.as_json()
+        results['GBPtoUSDRate'] = result['rate']
+    except:
+        if 'GBPtoUSDRate' not in results:
+            results['GBPtoUSDRate'] = 0
+
+def job3():
+    try:
+        ts = td.exchange_rate(symbol="USD/GBP")
+        result = ts.as_json()
+        results['USDtoGBPRate'] = result['rate']
+    except:
+        if 'USDtoGBPRate' not in results:
+            results['USDtoGBPRate'] = 0
 
 def job4():
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
@@ -777,6 +793,12 @@ else:
     scheduler.add_job(job24, 'interval', minutes=82, next_run_time=start_time + timedelta(minutes=22))
     scheduler.add_job(job25, 'interval', minutes=83, next_run_time=start_time + timedelta(minutes=23))
     scheduler.add_job(job26, 'interval', minutes=84, next_run_time=start_time + timedelta(minutes=24))
+    scheduler.add_job(job2, 'interval', minutes=85, next_run_time=start_time + timedelta(minutes=25))
+    scheduler.add_job(job3, 'interval', minutes=86, next_run_time=start_time + timedelta(minutes=26))
+    scheduler.add_job(job1, 'interval', minutes=87, next_run_time=start_time + timedelta(minutes=27))
+
+
+
     scheduler.add_job(cachejob, 'interval', minutes=85, next_run_time=start_time + timedelta(minutes=25), args=[cache])
 
 
