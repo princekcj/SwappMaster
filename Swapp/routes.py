@@ -727,7 +727,9 @@ def job7():
         result = "{:.4f}".format(float(result))
         results['GHStoCADRate'] = result
     except KeyError:
-        results['GHStoCADRate'] = 0
+        if 'GHStoCADRate' not in results:
+            results['GHStoCADRate'] = 0
+
 def cachejob(cache):
     print("Job ran at:")
     if cache:
