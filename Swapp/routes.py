@@ -731,7 +731,7 @@ def job7():
             results['GHStoCADRate'] = 0
 
 def cachejob(cache):
-    print("Job ran at:")
+    print(f"Job ran at:{datetime.utcnow()}")
     if cache:
         cache[0] = results
     else:
