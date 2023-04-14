@@ -967,7 +967,7 @@ def add_header(response):
 def home():
     GBPchange = GHSbaseprices.GHSbaseGBPchange()
     USDchange = GHSbaseprices.GHSbaseUSDchange()
-    USDprice = GHSbaseprices.GHSbaseUSDprice()
+    USDprice = Rates.USDtoGHSRate()
     GBPprice = GHSbaseprices.GHSbaseGBPprice()
     CADtoGHS = Rates.GHStoCADRate()
     JPYtoGHS = Rates.JPYtoGHSRate()
