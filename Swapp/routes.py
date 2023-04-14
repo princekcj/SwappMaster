@@ -660,7 +660,7 @@ def get_exchange_rates(symbols):
         for symbol in symbols:
             if f"{symbol}Rate" not in results:
                 results[f"{symbol}Rate"] = 0
-
+    print(results)
     return results
 
 def job():
