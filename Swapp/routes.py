@@ -750,8 +750,10 @@ def cachejob(cache):
     print(f"Job ran at:{datetime.utcnow()}")
     if cache:
         cache[0] = results
+        print(cache[0])
     else:
         cache.append(results)
+        print(cache[0])
 
 
 import sys, socket
