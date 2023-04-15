@@ -745,8 +745,10 @@ def job7():
         if 'GHStoCADRate' not in results:
             results['GHStoCADRate'] = 0
 
+def make_cache_key(*args, **kwargs):
+    return request.url
 
-@cacheen.cached(timeout=3600)
+@cacheen.cached(timeout=3600, key_prefix=make_cache_key)
 def cachejob(cache):
     print(f"Job ran at:{datetime.utcnow()}")
     if cache:
