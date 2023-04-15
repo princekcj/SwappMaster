@@ -4,6 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_mail import Mail
+from flask_caching import Cache
+
+
 
 
 app = Flask(__name__, template_folder='horizontemplates')
@@ -21,6 +24,7 @@ app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 mail = Mail(app)
 db.init_app(app)
+cacheen = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 
 

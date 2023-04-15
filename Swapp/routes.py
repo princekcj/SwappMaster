@@ -826,12 +826,16 @@ class GHSbaseprices:
         return result
 
     def GHSbaseGBPprice():
-        result = cache[0]['GHSbaseGBPprice']
-        return result
+            result = cache[0]['GHSbaseGBPprice']
+            return result
 
     def GHSbaseGBPchange():
-        result = cache[0]['GHSbaseGBPchange']
-        return result
+        try:
+            result = cache[0]['GHSbaseGBPchange']
+            return result
+        except:
+            result = 0
+            return result
 
 class Rates:
     def GHStoUSDRate():
