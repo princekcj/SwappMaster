@@ -6,7 +6,7 @@ from flask_mail import Message
 import phonenumbers
 import pycountry
 import time
-from Swapp import db, app, bcrypt, mail
+from Swapp import db, app, bcrypt, mail, cacheen
 from sqlalchemy import desc
 from Swapp.models import User, Transaction, ActiveBid, UserEvents
 from flask_login import login_user, current_user, logout_user, login_required
@@ -646,7 +646,6 @@ def job13():
 
 
 def job():
-
     try:
         ts = td.exchange_rate(symbol="GHS/USD")
         result = ts.as_json()
@@ -746,6 +745,8 @@ def job7():
         if 'GHStoCADRate' not in results:
             results['GHStoCADRate'] = 0
 
+
+@cacheen.cached(timeout=3600)
 def cachejob(cache):
     print(f"Job ran at:{datetime.utcnow()}")
     if cache:
