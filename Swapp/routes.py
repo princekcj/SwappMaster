@@ -820,8 +820,12 @@ def shutdown():
 class GHSbaseprices:
 
     def GHSbaseUSDprice():
-        result = cache[0]['GHSbaseUSDprice']
-        return result
+        try:
+            result = cache[0]['GHSbaseUSDprice']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHSbaseUSDchange():
         try:
@@ -832,7 +836,11 @@ class GHSbaseprices:
             return result
 
     def GHSbaseGBPprice():
+        try:
             result = cache[0]['GHSbaseGBPprice']
+            return result
+        except:
+            result = 0
             return result
 
     def GHSbaseGBPchange():
@@ -845,105 +853,207 @@ class GHSbaseprices:
 
 class Rates:
     def GHStoUSDRate():
-        result = cache[0]['GHStoUSDRate']
-        return result
+        try:
+            result = cache[0]['GHStoUSDRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def USDtoGHSRate():
-        result = cache[0]['USDtoGHSRate']
-        return result
+        try:
+            result = cache[0]['USDtoGHSRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def GBPtoUSDRate():
-        result = cache[0]['GBPtoUSDRate']
-        return result
+        try:
+            result = cache[0]['GBPtoUSDRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def USDtoGBPRate():
-        result = cache[0]['USDtoGBPRate']
-        return result
+        try:
+            result = cache[0]['USDtoGBPRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHStoGBPRate():
-        result = cache[0]['GHStoGBPRate']
-        return result
+        try:
+            result = cache[0]['GHStoGBPRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def GBPtoGHSRate():
-        result = cache[0]['GBPtoGHSRate']
-        return result
+        try:
+            result = cache[0]['GBPtoGHSRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def EURtoGHSRate():
-        result = cache[0]['EURtoGHSRate']
-        return result
+        try:
+            result = cache[0]['EURtoGHSRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHStoEURRate():
-        result = cache[0]['GHStoEURRate']
-        return result
+        try:
+            result = cache[0]['GHStoEURRate']
+            return result
+        except:
+            result = 0
+            return result
+
 
     def CADtoGHSRate():
-        result = cache[0]['CADtoGHSRate']
-        return result
+        try:
+            result = cache[0]['CADtoGHSRate']
+            return result
+        except:
+            result = 0
+            return result
+
 
     def GHStoCADRate():
-        result = cache[0]['GHStoCADRate']
-        return result
+        try:
+            result = cache[0]['GHStoCADRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHStoNGNRate():
-        result = cache[0]['GHStoNGNRate']
-        return result
+        try:
+            result = cache[0]['GHStoNGNRate']
+            return result
+        except:
+            result = 0
+            return result
 
 
     def CHFtoGHSRate():
-        result = cache[0]['CHFtoGHSRate']
-        return result
+        try:
+            result = cache[0]['CHFtoGHSRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def ZARtoGHSRate():
-        result = cache[0]['ZARtoGHSRate']
-        return result
+        try:
+            result = cache[0]['ZARtoGHSRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHStoZARRate():
-        result = cache[0]['GHStoZARRate']
-        return result
+        try:
+            result = cache[0]['GHStoZARRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def JPYtoGHSRate():
-        result = cache[0]['JPYtoGHSRate']
-        return result
+        try:
+            result = cache[0]['JPYtoGHSRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHStoJPYRate():
-        result = cache[0]['GHStoJPYRate']
-        return result
+        try:
+            result = cache[0]['GHStoJPYRate']
+            return result
+        except:
+            result = 0
+            return result
 
     def EURbaseGHSchange():
-        result = cache[0]['EURbaseGHSchange']
-        return result
+        try:
+            result = cache[0]['EURbaseGHSchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHSbaseEURchange():
-        result = cache[0]['GHSbaseEURchange']
-        return result
+        try:
+            result = cache[0]['GHSbaseEURchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def JPYbaseGHSchange():
-        result = cache[0]['JPYbaseGHSchange']
-        return result
+        try:
+            result = cache[0]['JPYbaseGHSchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHSbaseJPYchange():
-        result = cache[0]['GHSbaseJPYchange']
-        return result
+        try:
+            result = cache[0]['GHSbaseJPYchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def CADbaseGHSchange():
-        result = cache[0]['CADbaseGHSchange']
-        return result
+        try:
+            result = cache[0]['CADbaseGHSchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHSbaseCADchange():
-        result = cache[0]['GHSbaseCADchange']
-        return result
+        try:
+            result = cache[0]['GHSbaseCADchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHSbaseZARchange():
-        result = cache[0]['GHSbaseZARchange']
-        return result
+        try:
+            result = cache[0]['GHSbaseZARchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def GHSbaseNGNchange():
-        result = cache[0]['GHSbaseNGNchange']
-        return result
+        try:
+            result = cache[0]['GHSbaseNGNchange']
+            return result
+        except:
+            result = 0
+            return result
 
     def CHFbaseGHSchange():
-        result = cache[0]['CHFbaseGHSchange']
-        return result
+        try:
+            result = cache[0]['CHFbaseGHSchange']
+            return result
+        except:
+            result = 0
+            return result
 
 
 
