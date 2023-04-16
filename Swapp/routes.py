@@ -749,7 +749,7 @@ def make_cache_key(*args, **kwargs):
     with app.app_context():
         return request.url
 
-@cacheen.cached(timeout=3600, key_prefix=make_cache_key)
+@cacheen.memoize(3600)
 def cachejob(cache):
     print(f"Job ran at:{datetime.utcnow()}")
     if cache:
@@ -1192,6 +1192,7 @@ def transactions ():
 
 
 @app.route("/register", methods=['GET', 'POST'])
+@cacheen.cached(timeout=3600, key_prefix=make_cache_key)
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('trading'))
