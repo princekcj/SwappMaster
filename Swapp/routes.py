@@ -819,7 +819,7 @@ def shutdown():
 
 
 class GHSbaseprices:
-
+    @cacheen.memoize(3600)
     def GHSbaseUSDprice():
         try:
             result = cache[0]['GHSbaseUSDprice']
@@ -828,6 +828,7 @@ class GHSbaseprices:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseUSDchange():
         try:
             result = cache[0]['GHSbaseUSDchange']
@@ -836,6 +837,7 @@ class GHSbaseprices:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseGBPprice():
         try:
             result = cache[0]['GHSbaseGBPprice']
@@ -844,6 +846,7 @@ class GHSbaseprices:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseGBPchange():
         try:
             result = cache[0]['GHSbaseGBPchange']
@@ -853,6 +856,7 @@ class GHSbaseprices:
             return result
 
 class Rates:
+    @cacheen.memoize(3600)
     def GHStoUSDRate():
         try:
             result = cache[0]['GHStoUSDRate']
@@ -861,6 +865,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def USDtoGHSRate():
         try:
             result = cache[0]['USDtoGHSRate']
@@ -869,6 +874,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GBPtoUSDRate():
         try:
             result = cache[0]['GBPtoUSDRate']
@@ -877,6 +883,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def USDtoGBPRate():
         try:
             result = cache[0]['USDtoGBPRate']
@@ -885,6 +892,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHStoGBPRate():
         try:
             result = cache[0]['GHStoGBPRate']
@@ -893,6 +901,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GBPtoGHSRate():
         try:
             result = cache[0]['GBPtoGHSRate']
@@ -901,6 +910,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def EURtoGHSRate():
         try:
             result = cache[0]['EURtoGHSRate']
@@ -909,6 +919,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHStoEURRate():
         try:
             result = cache[0]['GHStoEURRate']
@@ -917,7 +928,7 @@ class Rates:
             result = 0
             return result
 
-
+    @cacheen.memoize(3600)
     def CADtoGHSRate():
         try:
             result = cache[0]['CADtoGHSRate']
@@ -926,7 +937,7 @@ class Rates:
             result = 0
             return result
 
-
+    @cacheen.memoize(3600)
     def GHStoCADRate():
         try:
             result = cache[0]['GHStoCADRate']
@@ -935,6 +946,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHStoNGNRate():
         try:
             result = cache[0]['GHStoNGNRate']
@@ -943,7 +955,7 @@ class Rates:
             result = 0
             return result
 
-
+    @cacheen.memoize(3600)
     def CHFtoGHSRate():
         try:
             result = cache[0]['CHFtoGHSRate']
@@ -952,6 +964,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def ZARtoGHSRate():
         try:
             result = cache[0]['ZARtoGHSRate']
@@ -960,6 +973,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHStoZARRate():
         try:
             result = cache[0]['GHStoZARRate']
@@ -968,6 +982,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def JPYtoGHSRate():
         try:
             result = cache[0]['JPYtoGHSRate']
@@ -976,6 +991,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHStoJPYRate():
         try:
             result = cache[0]['GHStoJPYRate']
@@ -984,6 +1000,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def EURbaseGHSchange():
         try:
             result = cache[0]['EURbaseGHSchange']
@@ -992,6 +1009,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseEURchange():
         try:
             result = cache[0]['GHSbaseEURchange']
@@ -1000,6 +1018,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def JPYbaseGHSchange():
         try:
             result = cache[0]['JPYbaseGHSchange']
@@ -1008,6 +1027,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseJPYchange():
         try:
             result = cache[0]['GHSbaseJPYchange']
@@ -1016,6 +1036,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def CADbaseGHSchange():
         try:
             result = cache[0]['CADbaseGHSchange']
@@ -1024,6 +1045,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseCADchange():
         try:
             result = cache[0]['GHSbaseCADchange']
@@ -1032,6 +1054,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseZARchange():
         try:
             result = cache[0]['GHSbaseZARchange']
@@ -1040,6 +1063,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def GHSbaseNGNchange():
         try:
             result = cache[0]['GHSbaseNGNchange']
@@ -1048,6 +1072,7 @@ class Rates:
             result = 0
             return result
 
+    @cacheen.memoize(3600)
     def CHFbaseGHSchange():
         try:
             result = cache[0]['CHFbaseGHSchange']
@@ -1118,6 +1143,7 @@ def add_header(response):
 
 @app.route("/")
 @app.route("/home")
+@cacheen.cached(timeout=3600, key_prefix=make_cache_key)
 def home():
     GBPchange = GHSbaseprices.GHSbaseGBPchange()
     USDchange = GHSbaseprices.GHSbaseUSDchange()
@@ -1533,7 +1559,7 @@ def intiate_chat():
             requestOwner = User.query.filter_by(id=requesting.Requester_user_id).first()
             bidder = User.query.filter_by(id=request.json['bidder_user_id']).first()
             if requesting.RequestAcceptor_user_id == bidder.id:
-                url = "https://api.maytapi.com/api/abf38d08-9151-4a0a-b1e7-5a37e44829a9/27413/createGroup"
+                url = "https://api.maytapi.com/api/af7a5df8-04f1-4806-b1f7-fc1cf347a6a8/27980/createGroup"
 
                 payload = json.dumps({
                     "name": "Swapp group test",
@@ -1543,7 +1569,7 @@ def intiate_chat():
                     ]
                 })
                 headers = {
-                    'x-maytapi-key': '04312fbb-da97-4c13-a9bb-ed3bb41df438',
+                    'x-maytapi-key': 'fedf4684-07da-44a9-b8af-ea68971b567a',
                     'Content-Type': 'application/json'
                 }
 
@@ -1594,7 +1620,7 @@ def intiate_chatfromx():
             exchangeevent = UserEvents.query.filter_by(id=request.json['id']).first()
 
 
-            url = "https://api.maytapi.com/api/abf38d08-9151-4a0a-b1e7-5a37e44829a9/27413/createGroup"
+            url = "https://api.maytapi.com/api/af7a5df8-04f1-4806-b1f7-fc1cf347a6a8/27980/createGroup"
 
             payload = json.dumps({
                 "name": "Swapp group test",
@@ -1604,7 +1630,7 @@ def intiate_chatfromx():
                 ]
             })
             headers = {
-                'x-maytapi-key': '04312fbb-da97-4c13-a9bb-ed3bb41df438',
+                'x-maytapi-key': 'fedf4684-07da-44a9-b8af-ea68971b567a',
                 'Content-Type': 'application/json'
             }
 
