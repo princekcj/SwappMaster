@@ -822,10 +822,9 @@ else:
 class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseUSDprice():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseUSDprice']
-            return result
+        cache = cacheen.get("cache")
+        result = cache[0]['GHSbaseUSDprice']
+        return result
 
 
     @cacheen.memoize(3600)
