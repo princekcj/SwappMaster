@@ -814,9 +814,9 @@ else:
 
 
     # Stop the scheduler when the Flask application shuts down
-@atexit.register
-def shutdown():
-    scheduler.shutdown()
+    @atexit.register
+    def shutdown():
+        scheduler.shutdown()
 
 
 class GHSbaseprices:
