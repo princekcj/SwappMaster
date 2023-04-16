@@ -1230,26 +1230,21 @@ def register():
             flash('This email address has already been registered. Please check your email for a confirmation link.', 'danger')
             return redirect(url_for('register'))
 
-
         # Create a dictionary of all country codes and their names
         country_codes = {}
         for country in pycountry.countries:
             country_codes[country.alpha_2] = country.name
 
         # Parse the phone number
-        phone_number = form.phone.data
+        phone_number = "+447732310142"
         parsed_number = phonenumbers.parse(phone_number)
-
         # Get the country code
-        country_code = parsed_number.country_code
-
+        country_code = phonenumbers.region_code_for_number(parsed_number)
         # Look up the country name using the country code
         if country_code in country_codes:
             country_name = country_codes[country_code]
         else:
             country_name = "Unknown"
-
-        print(country_name)
 
         # Create user object and commit to database
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
