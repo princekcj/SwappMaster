@@ -821,12 +821,9 @@ def shutdown():
 class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseUSDprice():
-        try:
-            result = cache[0]['GHSbaseUSDprice']
-            return result
-        except:
-            result = 0
-            return result
+        result = cache[0]['GHSbaseUSDprice']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHSbaseUSDchange():
@@ -1218,7 +1215,6 @@ def transactions ():
 
 
 @app.route("/register", methods=['GET', 'POST'])
-@cacheen.cached(timeout=3600, key_prefix=make_cache_key)
 def register():
     if current_user.is_authenticated:
         return redirect(url_for('trading'))
