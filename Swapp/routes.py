@@ -135,7 +135,7 @@ def bid_email_update(bid_occ):
     response = requests.request("POST", url, json=payload, headers=headers)
 
 
-cache = []
+cached = []
 results ={}
 
 def job14():
@@ -750,14 +750,15 @@ def make_cache_key(*args, **kwargs):
         return request.url
 
 @cacheen.memoize(3600)
-def cachejob(cache):
+def cachejob(cached):
     print(f"Job ran at:{datetime.utcnow()}")
-    if cache:
-        cache[0] = results
-        print(cache[0])
+    if cached:
+        cached[0] = results
+        print(cached[0])
+        cacheen.set("cache", cached[0])
     else:
-        cache.append(results)
-        print(cache[0])
+        cached.append(results)
+        cacheen.set("cache", cached[0])
 
 
 import sys, socket
@@ -822,6 +823,7 @@ class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseUSDprice():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseUSDprice']
             return result
         except:
@@ -831,6 +833,7 @@ class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseUSDchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseUSDchange']
             return result
         except:
@@ -840,6 +843,7 @@ class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseGBPprice():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseGBPprice']
             return result
         except:
@@ -849,6 +853,7 @@ class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseGBPchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseGBPchange']
             return result
         except:
@@ -859,6 +864,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHStoUSDRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHStoUSDRate']
             return result
         except:
@@ -868,6 +874,7 @@ class Rates:
     @cacheen.memoize(3600)
     def USDtoGHSRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['USDtoGHSRate']
             return result
         except:
@@ -877,6 +884,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GBPtoUSDRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GBPtoUSDRate']
             return result
         except:
@@ -886,6 +894,7 @@ class Rates:
     @cacheen.memoize(3600)
     def USDtoGBPRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['USDtoGBPRate']
             return result
         except:
@@ -895,6 +904,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHStoGBPRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHStoGBPRate']
             return result
         except:
@@ -904,6 +914,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GBPtoGHSRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GBPtoGHSRate']
             return result
         except:
@@ -913,6 +924,7 @@ class Rates:
     @cacheen.memoize(3600)
     def EURtoGHSRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['EURtoGHSRate']
             return result
         except:
@@ -922,6 +934,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHStoEURRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHStoEURRate']
             return result
         except:
@@ -931,6 +944,7 @@ class Rates:
     @cacheen.memoize(3600)
     def CADtoGHSRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['CADtoGHSRate']
             return result
         except:
@@ -940,6 +954,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHStoCADRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHStoCADRate']
             return result
         except:
@@ -949,6 +964,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHStoNGNRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHStoNGNRate']
             return result
         except:
@@ -958,6 +974,7 @@ class Rates:
     @cacheen.memoize(3600)
     def CHFtoGHSRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['CHFtoGHSRate']
             return result
         except:
@@ -967,6 +984,7 @@ class Rates:
     @cacheen.memoize(3600)
     def ZARtoGHSRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['ZARtoGHSRate']
             return result
         except:
@@ -976,6 +994,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHStoZARRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHStoZARRate']
             return result
         except:
@@ -985,6 +1004,7 @@ class Rates:
     @cacheen.memoize(3600)
     def JPYtoGHSRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['JPYtoGHSRate']
             return result
         except:
@@ -994,6 +1014,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHStoJPYRate():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHStoJPYRate']
             return result
         except:
@@ -1003,6 +1024,7 @@ class Rates:
     @cacheen.memoize(3600)
     def EURbaseGHSchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['EURbaseGHSchange']
             return result
         except:
@@ -1012,6 +1034,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHSbaseEURchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseEURchange']
             return result
         except:
@@ -1021,6 +1044,7 @@ class Rates:
     @cacheen.memoize(3600)
     def JPYbaseGHSchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['JPYbaseGHSchange']
             return result
         except:
@@ -1030,6 +1054,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHSbaseJPYchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseJPYchange']
             return result
         except:
@@ -1039,6 +1064,7 @@ class Rates:
     @cacheen.memoize(3600)
     def CADbaseGHSchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['CADbaseGHSchange']
             return result
         except:
@@ -1048,6 +1074,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHSbaseCADchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseCADchange']
             return result
         except:
@@ -1057,6 +1084,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHSbaseZARchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseZARchange']
             return result
         except:
@@ -1066,6 +1094,7 @@ class Rates:
     @cacheen.memoize(3600)
     def GHSbaseNGNchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['GHSbaseNGNchange']
             return result
         except:
@@ -1075,6 +1104,7 @@ class Rates:
     @cacheen.memoize(3600)
     def CHFbaseGHSchange():
         try:
+            cache = cacheen.get("cache")
             result = cache[0]['CHFbaseGHSchange']
             return result
         except:

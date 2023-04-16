@@ -24,7 +24,10 @@ app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 mail = Mail(app)
 db.init_app(app)
-cacheen = Cache(app, config={'CACHE_TYPE': 'simple'})
+app.config['CACHE_TYPE'] = 'FileSystemCache'
+app.config['CACHE_DIR'] = 'cache' # path to your server cache folder
+app.config['CACHE_THRESHOLD'] = 100000
+cacheen = Cache(app)
 
 
 
