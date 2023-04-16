@@ -821,9 +821,12 @@ def shutdown():
 class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseUSDprice():
-        result = cache[0]['GHSbaseUSDprice']
-        return result
-
+        try:
+            result = cache[0]['GHSbaseUSDprice']
+            return result
+        except:
+            result = 0
+            return result
 
     @cacheen.memoize(3600)
     def GHSbaseUSDchange():
