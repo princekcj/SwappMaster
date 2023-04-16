@@ -823,7 +823,8 @@ class GHSbaseprices:
     @cacheen.memoize(3600)
     def GHSbaseUSDprice():
         cache = cacheen.get("cache")
-        result = cache[0]['GHSbaseUSDprice']
+        print(cache)
+        result = cache['GHSbaseUSDprice']
         return result
 
 
