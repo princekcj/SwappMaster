@@ -746,7 +746,8 @@ def job7():
             results['GHStoCADRate'] = 0
 
 def make_cache_key(*args, **kwargs):
-    return request.url
+    with app.app_context():
+        return request.url
 
 @cacheen.cached(timeout=3600, key_prefix=make_cache_key)
 def cachejob(cache):
