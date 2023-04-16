@@ -806,7 +806,7 @@ else:
 
 
 
-    scheduler.add_job(cachejob, 'interval', minutes=88, next_run_time=start_time + timedelta(minutes=28), args=[cache])
+    scheduler.add_job(cachejob, 'interval', minutes=88, next_run_time=start_time + timedelta(minutes=28), args=[cached])
 
 
     # Add the third job to run 5 minutes after the second job
