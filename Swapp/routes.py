@@ -830,284 +830,193 @@ class GHSbaseprices:
 
     @cacheen.memoize(3600)
     def GHSbaseUSDchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseUSDchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseUSDchange']
+        return result
 
     @cacheen.memoize(3600)
     def GHSbaseGBPprice():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseGBPprice']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseGBPprice']
+        return result
 
     @cacheen.memoize(3600)
     def GHSbaseGBPchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseGBPchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseGBPchange']
+        return result
+
 
 class Rates:
     @cacheen.memoize(3600)
     def GHStoUSDRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHStoUSDRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHStoUSDRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def USDtoGHSRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['USDtoGHSRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['USDtoGHSRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def GBPtoUSDRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GBPtoUSDRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GBPtoUSDRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def USDtoGBPRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['USDtoGBPRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['USDtoGBPRate']
+        return result
 
     @cacheen.memoize(3600)
     def GHStoGBPRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHStoGBPRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHStoGBPRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def GBPtoGHSRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GBPtoGHSRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GBPtoGHSRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def EURtoGHSRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['EURtoGHSRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['EURtoGHSRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHStoEURRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHStoEURRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHStoEURRate']
+        return result
 
     @cacheen.memoize(3600)
     def CADtoGHSRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['CADtoGHSRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['CADtoGHSRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHStoCADRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHStoCADRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHStoCADRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHStoNGNRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHStoNGNRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHStoNGNRate']
+        return result
 
     @cacheen.memoize(3600)
     def CHFtoGHSRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['CHFtoGHSRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['CHFtoGHSRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def ZARtoGHSRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['ZARtoGHSRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['ZARtoGHSRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHStoZARRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHStoZARRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHStoZARRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def JPYtoGHSRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['JPYtoGHSRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['JPYtoGHSRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHStoJPYRate():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHStoJPYRate']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHStoJPYRate']
+        return result
+
 
     @cacheen.memoize(3600)
     def EURbaseGHSchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['EURbaseGHSchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['EURbaseGHSchange']
+        return result
 
     @cacheen.memoize(3600)
     def GHSbaseEURchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseEURchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseEURchange']
+        return result
+
 
     @cacheen.memoize(3600)
     def JPYbaseGHSchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['JPYbaseGHSchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['JPYbaseGHSchange']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHSbaseJPYchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseJPYchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseJPYchange']
+        return result
+
 
     @cacheen.memoize(3600)
     def CADbaseGHSchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['CADbaseGHSchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['CADbaseGHSchange']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHSbaseCADchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseCADchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseCADchange']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHSbaseZARchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseZARchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseZARchange']
+        return result
+
 
     @cacheen.memoize(3600)
     def GHSbaseNGNchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['GHSbaseNGNchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['GHSbaseNGNchange']
+        return result
+
 
     @cacheen.memoize(3600)
     def CHFbaseGHSchange():
-        try:
-            cache = cacheen.get("cache")
-            result = cache[0]['CHFbaseGHSchange']
-            return result
-        except:
-            result = 0
-            return result
+        cache = cacheen.get("cache")
+        result = cache['CHFbaseGHSchange']
+        return result
 
 
 
