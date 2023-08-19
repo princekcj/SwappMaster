@@ -1554,10 +1554,10 @@ def complete_exchange():
             elif current_user.id == userevent._user_idOfEvents:
                 request_.RequesterCompletion = True
 
-            if (request_.RequesterAcceptorCompletion == True) & (request_.RequesterCompletion == True):
+            if request_.RequesterCompletion == True:
                 userevent.status = 'Complete'
             else:
-                flash('Both Users Need To Complete', 'warning')
+                flash('Requester Need To Complete', 'warning')
             Fulfilmentcheck(request_)
             db.session.commit()
     return jsonify({"value": "success"})
