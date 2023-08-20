@@ -15,10 +15,5 @@ admin.add_view(SuperuserModelView(Transaction, db.session))
 admin.add_view(SuperuserModelView(UserEvents, db.session))
 admin.add_view(SuperuserModelView(ActiveBid, db.session))
 
-# Check if the current user's email matches the superuser emails
-if current_user.is_authenticated and current_user.email in ['caseyjumu1@live.co.uk', 'cjbizent@gmail.com']:
-    current_user.is_superuser = True
-    db.session.commit()
-
 if __name__ == '__main__':
     app.run(debug=False)

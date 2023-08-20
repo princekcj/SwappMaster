@@ -1195,6 +1195,11 @@ def register():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
         user = User(username=form.username.data, location=country_name, email=form.email.data, phone=form.phone.data,
                     password=hashed_password)
+
+        # Check if the current user's email matches the superuser emails
+        if user.email in ['caseyjumu1@live.co.uk', 'cjbizent@gmail.com']:
+            current_user.is_superuser = True
+
         db.session.add(user)
         db.session.commit()
 
