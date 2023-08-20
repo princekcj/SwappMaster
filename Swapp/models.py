@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     location = db.Column(db.String(120), unique=False, nullable=False)
+    is_superuser = db.Column(db.Boolean, nullable=False, default= False)
     phone = db.Column(db.String(120), unique=True, nullable=False)
     user_events = db.relationship('UserEvents', backref='UserEvents', lazy=True)
     password = db.Column(db.String(60), nullable=False)
