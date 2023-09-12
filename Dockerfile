@@ -7,11 +7,13 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Create a virtual environment and activate it
-RUN python -m venv venv
-RUN . venv/bin/activate && pip install -r requirements.txt
+# Upgrade pip and setuptools
+RUN pip install --no-cache-dir --upgrade pip setuptools
 
-# Make port 80 available to the world outside this container
+# Install any needed packages specified in requirements.txt
+RUN pip install -r requirements.txt
+
+# Make port 5000 available to the world outside this container
 EXPOSE 5000
 
 # Define environment variable
