@@ -13,6 +13,7 @@ RUN . venv/bin/activate && pip install --no-cache-dir --upgrade pip setuptools
 
 # Install project dependencies from requirements.txt
 RUN . venv/bin/activate && pip install --no-cache-dir -r requirements.txt
+RUN pip install flask-login
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
