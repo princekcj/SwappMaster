@@ -18,7 +18,7 @@ RUN . venv/bin/activate && pip install --no-cache-dir -r requirements.txt
 EXPOSE 5000
 
 # Define environment variable
-ENV NAME World
+ENV DEBUG=false
 
 # Run app.py when the container launches
-CMD ["python", "Horizonpay.py"]
+ENTRYPOINT python Horizonpay.py --host 10.1.40.51 --port 5000
