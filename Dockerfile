@@ -7,11 +7,12 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Upgrade pip and setuptools
-RUN pip install --no-cache-dir --upgrade pip setuptools
+# Create a virtual environment and activate it
+RUN python -m venv venv
+RUN . venv/bin/activate && pip install --no-cache-dir --upgrade pip setuptools
 
-# Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+# Install project dependencies from requirements.txt
+RUN . venv/bin/activate && pip install --no-cache-dir -r requirements.txt
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
