@@ -22,4 +22,4 @@ EXPOSE 5000
 ENV DEBUG=false
 
 # Run app.py when the container launches
-ENTRYPOINT python Horizonpay.py --host 10.1.40.51 --port 5000
+ENTRYPOINT ["gunicorn", "--bind", "10.1.40.51:5000", "Horizonpay:app"]
