@@ -1198,7 +1198,7 @@ def register():
 
         # Check if the current user's email matches the superuser emails
         if user.email in ['caseyjumu1@live.co.uk', 'cjbizent@gmail.com']:
-            current_user.is_superuser = True
+            user.is_superuser = True
 
         db.session.add(user)
         db.session.commit()
