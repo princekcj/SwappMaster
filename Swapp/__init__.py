@@ -10,7 +10,7 @@ from flask_caching import Cache
 
 
 app = Flask(__name__, template_folder='horizontemplates')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://mecgxbvscdmynp:99bcfca636b54b1b88aae3253dcc17254d28c473f910ec9e27a176d03f424e0d@ec2-44-199-147-86.compute-1.amazonaws.com:5432/d1j24gimo1og4o'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://majestic-nimbus-332315:europe-west2:testswapp'
 app.config['SECRET_KEY'] = '2411628bb0b13ce0c676dfde280ba245'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
