@@ -22,4 +22,4 @@ EXPOSE 5000
 ENV DEBUG=false
 
 # Run app.py when the container launches
-ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5000","--keep-alive", "None", "Horizonpay:app"]
+ENTRYPOINT ["gunicorn", "--bind", "0.0.0.0:5000", "Horizonpay:app"]
